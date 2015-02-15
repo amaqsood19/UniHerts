@@ -1,0 +1,56 @@
+<buildings>
+    <building>
+        <name>Main Building</name>
+        <address>University of Hertfordshire</address>
+        <lat>51.752375</lat>
+        <lang>-0.242108</lang>
+        <zoom>18</zoom>
+        <rooms>
+            <room>
+                <name>B124</name>
+                <lat>51.752375</lat>
+                <lang>-0.242128</lang>
+                <zoom>20</zoom>
+                <type>classroom</type>
+            </room>
+            <room>
+                <name>B125</name>
+                <lat>51.752375</lat>
+                <lang>-0.24109</lang>
+                <zoom>20</zoom>
+                <type>classroom</type>
+            </room>
+        </rooms>
+    </building>
+    <building>
+        <name>Main Building D </name>
+        <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
+        <lat>51.752375</lat>
+        <lang>-0.241353</lang>
+        <zoom>18</zoom>
+        <rooms>
+            <room>
+                <name>B126</name>
+                <lat>51.752575</lat>
+                <lang>-0.245108</lang>
+                <zoom>20</zoom>
+                <type>classroom</type>
+            </room>
+            <room>
+                <name>B127</name>
+                <lat>51.785375</lat>
+                <lang>-0.282108</lang>
+                <zoom>20</zoom>
+                <type>classroom</type>
+            </room>
+        </rooms>
+    </building>
+    <building>
+        <name>LRC - Buxton Centre for Learning</name>
+        <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
+        <lat>51.752629</lat>
+        <lang>-0.238506</lang>
+        <zoom>18</zoom>
+    </building>
+    <rooms></rooms>
+</buildings>

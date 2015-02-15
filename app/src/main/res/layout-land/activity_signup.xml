@@ -1,0 +1,94 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignUpActivity" >
+    <!-- Login form -->
+    <ScrollView
+        android:id="@+id/signup_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            style="@style/LoginFormContainer"
+            android:orientation="vertical" >
+            <EditText
+                android:id="@+id/first_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_firstname"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+            <EditText
+                android:id="@+id/last_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_lastname"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+            <EditText
+                android:id="@+id/studentid_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_studentid"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="number" />
+
+            <Button
+                android:layout_width="559dp"
+                android:layout_height="wrap_content"
+                android:text="Scan Card"
+                android:id="@+id/scan_card_button"
+                android:layout_gravity="right"
+                android:onClick="scanCard" />
+
+            <EditText
+                android:id="@+id/card_barcode_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_card_barcode"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:editable="false"
+                android:enabled="true"
+                android:clickable="true"
+                android:onClick="scanCard" />
+            <EditText
+                android:id="@+id/username_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_username"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
+            <EditText
+                android:id="@+id/password_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+            <EditText
+                android:id="@+id/password_again_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password_again"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:imeActionId="@+id/edittext_action_signup"
+                android:imeActionLabel="@string/signup"
+                android:imeOptions="actionUnspecified" />
+            <Button
+                android:id="@+id/action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="@string/signup" />
+        </LinearLayout>
+    </ScrollView>
+</merge>
