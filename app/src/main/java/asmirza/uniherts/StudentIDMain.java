@@ -13,16 +13,18 @@ import com.parse.ParseUser;
 
 public class StudentIDMain extends Activity {
 
+    String firstName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentid_main);
 
-        String firstName = ParseUser.getCurrentUser().get("firstName").toString();
-
+        //firstName = ParseUser.getCurrentUser().get("firstName").toString();
+        firstName = "Student";
 
         TextView wel_name_view = (TextView) findViewById(R.id.wel_name);
-        wel_name_view.setText(firstName);
+        wel_name_view.setText("Hi," + firstName);
     }
 
 
@@ -59,7 +61,7 @@ public class StudentIDMain extends Activity {
     // Call the Parse log out method
         ParseUser.logOut();
         // Start and intent for the dispatch activity
-        Intent intent = new Intent(StudentIDMain.this, DispatchActivity.class);
+        Intent intent = new Intent(this, DispatchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 

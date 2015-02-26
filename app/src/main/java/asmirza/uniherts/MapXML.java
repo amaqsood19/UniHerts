@@ -39,7 +39,6 @@ public class MapXML {
             event = xpp.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
                 String tageName =xpp.getName();
-                System.out.println("" + tageName);
                 switch (event){
                     case XmlPullParser.START_TAG:
                         if(tageName.equals("rooms"))
@@ -47,14 +46,12 @@ public class MapXML {
 
                             boolean stopLoop = false;
 
-                            building = new Building(lat, lang, name, address, zoom);
 
                             int event2 = xpp.getEventType();
                             String tageName2 = "";
                             while (!stopLoop) {
 
                                 tageName2 =xpp.getName();
-                                System.out.println("" + tageName2);
                                 switch (event2){
                                     case XmlPullParser.START_TAG:
                                         break;
@@ -81,8 +78,12 @@ public class MapXML {
                                             roomType = text;
                                         }
                                         else if(tageName2.equals("room")){
+                                            System.out.println("" + tageName);
+                                            System.out.println("ROOM END ");
                                             room = new Room(lat, lang, name, zoom, building.getName(), roomType);
+                                            System.out.println("ROOM READY " + room.getName());
                                             building.addRoom(room);
+                                            System.out.println("ROOM added ");
                                         }
                                         else{
                                         }
@@ -118,6 +119,7 @@ public class MapXML {
                         else if(tageName.equals("zoom")){
                             zoom = Float.valueOf(text);
                             building = new Building(lat, lang, name, address, zoom);
+                            System.out.println("BUILDING READY " + building.getName());
                         }
                         else{
                         }
@@ -141,5 +143,9 @@ public class MapXML {
 
     public void setBuildings(HashMap<String, Place> buildings) {
         this.buildings = buildings;
+    }
+
+    public void getAllRooms(HashMap<String, Place> buildings) {
+
     }
 }

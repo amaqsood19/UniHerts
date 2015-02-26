@@ -13,20 +13,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.maps.android.ui.IconGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class UniMap extends FragmentActivity {
 
-    static final LatLng CollegeLane = new LatLng(51.752375,-0.241353);
+    static final LatLng collegeLane = new LatLng(51.752375,-0.241353);
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     MapXML mapXML;
 
@@ -111,13 +115,19 @@ public class UniMap extends FragmentActivity {
         mMap.setMyLocationEnabled(true);
 
 
-        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(CollegeLane, 18);
+        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 19);
         mMap.animateCamera(intialCameraUpdate);
 
 
         createBoundary();
 
+
+
+        //addOverlay();
+
         mapXML = new MapXML(getResources().getXml(R.xml.building_markers));
+
+
 
 
         mapXML.readXML();
@@ -126,6 +136,44 @@ public class UniMap extends FragmentActivity {
 
         plotMarkers(mapXML.getBuildings());
 
+        set3DMap(true);
+        setIndoorMap(true);
+
+
+
+
+    }
+
+    public void zoomTo (Place place){
+        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getMarker().getPosition(),place.getZoom());
+        mMap.animateCamera(intialCameraUpdate);
+    }
+
+
+
+    private void addOverlay() {
+
+        //top left corner 51.748717, -0.236957
+        //top right corner 51.754445, -0.238229
+        // bottom right corner 51.754445, -0.236957
+        // bottom left corner 51.748717, -0.238229
+
+        //top =
+        //left =
+        //right =
+        //bottom =
+
+        LatLng southWest = new LatLng(51.754445, -0.238229);
+        LatLng northEast= new LatLng(51.748717, -0.236957);
+
+        LatLngBounds latLngBounds = new LatLngBounds(northEast,southWest );
+
+        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.raw.overlay_map))
+                .positionFromBounds(latLngBounds ).transparency(0.5f);
+
+         // Add an overlay to the map, retaining a handle to the GroundOverlay object.
+        GroundOverlay imageOverlay = mMap.addGroundOverlay(newarkMap);
 
 
     }
@@ -141,26 +189,20 @@ public class UniMap extends FragmentActivity {
             Map.Entry<String, Place> placeEntry = iterator.next();
             Building building = (Building) placeEntry.getValue();
 
-            HashMap<String, Place> rooms = building.getRooms();
+            ArrayList<Room> rooms = building.getRooms();
             System.out.println("" + building.getName());
 
-            mMap.addMarker(building.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(building.getAddress()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(building.getName()))));
+            mMap.addMarker(building.getMarker().snippet(building.getAddress()).icon(BitmapDescriptorFactory
+                    .fromResource(R.raw.university)));
 
             if (rooms.size() != 0)
             {
-
-                Iterator<Map.Entry<String, Place>> iteratorRooms = rooms.entrySet().iterator();
-                while (iteratorRooms.hasNext()) {
-                    Map.Entry<String, Place> roomEntry = iteratorRooms.next();
-                    Room room = (Room) roomEntry.getValue();
-
+                System.out.println("Adding Rooms");
+                for (Room room : building.getRooms())
+                {
                     System.out.println(room.getName());
 
-
-
-                    iconFactory.setRotation(0);
-                    iconFactory.setContentRotation(90);
-                    iconFactory.setStyle(IconGenerator.STYLE_GREEN);
+                    iconFactory.setColor(Color.CYAN);
 
                     mMap.addMarker(room.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(room.getType()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(room.getName()))));
                 }
@@ -181,15 +223,38 @@ public class UniMap extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.buildings:
-                Intent intent = new Intent(this, MapBuildings.class);
-                startActivity(intent);
+            case R.id.buildings_menu_button:
+                Intent intent = new Intent(this, ListBuildings.class);
+                startActivityForResult(intent, 1);
                 return true;
             case R.id.rooms:
+                Intent listRooms = new Intent(this, ListRooms.class);
+                startActivityForResult(listRooms, 1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {return;}
+        String name = data.getStringExtra("place");
+        zoomTo(mapXML.getBuildings().get(name));
+
+    }
+
+    private void BitmapDescriptor(String type) {
+
+    }
+
+    private void set3DMap(boolean value) {
+        mMap.setBuildingsEnabled(true);
+    }
+
+    private void setIndoorMap(boolean value) {
+        mMap.setIndoorEnabled(value);
+    }
+
 
 }

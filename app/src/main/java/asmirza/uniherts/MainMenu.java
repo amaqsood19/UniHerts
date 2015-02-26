@@ -84,13 +84,17 @@ public class MainMenu extends Activity {
     }
 
     public void openID(View view) {
-        startActivity(new Intent(this, DispatchActivity.class));
+    // Start an intent for the logged in activity
+        Intent intent = new Intent(this, DispatchActivity.class);
+        startActivity(intent);
 
 
     }
 
-    public void openFood(View view) {
-        startActivity(new Intent(this, DispatchActivity.class));
+    public void openStaticMap(View view) {
+
+        Intent intent = new Intent(this, StaticMap.class);
+        startActivity(intent);
 
 
     }

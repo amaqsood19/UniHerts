@@ -1,58 +1,117 @@
 package asmirza.uniherts;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
-/**
- * Created by ASMIRZA on 15/02/2015.
- */
+public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable {
+    private List<Place> placeList;
+    private Context context;
+    private Filter placeFilter;
+    private List<Place> origPlaceList;
 
-public class PlacesListAdapter extends BaseAdapter {
-    private final ArrayList mData;
 
-    public PlacesListAdapter(Map<String, Place> map) {
-        mData = new ArrayList();
-        mData.addAll(map.entrySet());
+    public PlacesListAdapter(List<Place> planetList, Context ctx) {
+        super(ctx, R.layout.place_list_item, planetList);
+        this.placeList = planetList;
+        this.context = ctx;
+        this.origPlaceList = planetList;
     }
-
-    @Override
     public int getCount() {
-        return mData.size();
+        return placeList.size();
     }
-
-    @Override
-    public Map.Entry<String,Place> getItem(int position) {
-        return (Map.Entry) mData.get(position);
+    public Place getItem(int position) {
+        return placeList.get(position);
     }
-
-    @Override
     public long getItemId(int position) {
-        // TODO implement you own logic with ID
-        return 0;
+        return placeList.get(position).hashCode();
     }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View result;
-
+        View v = convertView;
+        PlaceHolder holder = new PlaceHolder();
+        // First let's verify the convertView is not null
         if (convertView == null) {
-            result = LayoutInflater.from(parent.getContext()).inflate(R.layout.location_list_item, parent, false);
-        } else {
-            result = convertView;
+            // This a new view we inflate the new layout
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.place_list_item, null);
+            // Now we can fill the layout with the right values
+            TextView tv = (TextView) v.findViewById(R.id.place_name);
+            TextView distView = (TextView) v.findViewById(R.id.place_description);
+            holder.placeNameView = tv;
+            holder.distView = distView;
+            v.setTag(holder);
         }
 
-        Map.Entry<String, Place> item = getItem(position);
+        holder = (PlaceHolder) v.getTag();
+        Place p = placeList.get(position);
+        holder.placeNameView.setText(p.getName());
+        holder.distView.setText(p.getMarker().getSnippet());
 
-        // TODO replace findViewById by ViewHolder
-        ((TextView) result.findViewById(R.id.location_name)).setText(item.getKey());
-        ((TextView) result.findViewById(R.id.location_description)).setText(item.getValue().getName());
+        return v;
+    }
 
-        return result;
+
+    public void resetData() {
+        placeList = origPlaceList;
+    }
+    /* *********************************
+    * We use the holder pattern
+    * It makes the view faster and avoid finding the component
+    * **********************************/
+    private static class PlaceHolder {
+        public TextView placeNameView;
+        public TextView distView;
+    }
+    /*
+    * We create our filter
+    */
+    @Override
+    public Filter getFilter() {
+        if (placeFilter == null)
+            placeFilter = new PlaceFilter();
+        return placeFilter;
+    }
+    private class PlaceFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            // We implement here the filter logic
+            if (constraint == null || constraint.length() == 0) {
+                // No filter implemented we return all the list
+                results.values = origPlaceList;
+                results.count = origPlaceList.size();
+            }
+            else {
+                // We perform filtering operation
+                List<Place> nPlaceList = new ArrayList<Place>();
+                for (Place p : placeList) {
+                    if (p.getName().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                        nPlaceList.add(p);
+                }
+                results.values = nPlaceList;
+                results.count = nPlaceList.size();
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            // Now we have to inform the adapter about the new list filtered
+            if (results.count == 0)
+                notifyDataSetInvalidated();
+            else {
+                placeList = (List<Place>) results.values;
+                notifyDataSetChanged();
+            }
+        }
     }
 }

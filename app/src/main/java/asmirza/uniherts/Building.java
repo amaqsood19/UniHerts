@@ -1,45 +1,38 @@
 package asmirza.uniherts;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by ASMIRZA on 13/02/2015.
  */
 public class Building extends Place {
 
-    private HashMap<String,Place> rooms;
+    private ArrayList<Room> rooms;
     private String address;
 
 
-    public Building(Double lat, Double lang, String name, float zoom, String address, HashMap<String, Place> rooms) {
+    public Building(Double lat, Double lang, String name, float zoom, String address, ArrayList<Room> rooms) {
         super(lat, lang, name, zoom);
         this.address = address;
         this.rooms = rooms;
-        rooms = new HashMap<String,Place>();
     }
 
     public Building(Double lat, Double lang, String name, String address, float zoom) {
         super(lat, lang, name, zoom);
         this.address = address;
-        rooms = new HashMap<String,Place>();
     }
 
-    public HashMap<String, Place> getRooms() {
+    public ArrayList<Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(HashMap<String, Place> rooms) {
+    public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
-    }
-
-    public Room getRoom(String roomNo)
-    {
-        return (Room) rooms.get(roomNo);
     }
 
     public void addRoom(Room room)
     {
-        rooms.put(room.getName(),room);
+        rooms.add(room);
     }
 
     public String getAddress() {

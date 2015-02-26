@@ -12,6 +12,7 @@ public class Place {
     private Double lang;
     private String name;
     private float zoom;
+    private String info;
     private MarkerOptions marker;
 
 
@@ -20,6 +21,15 @@ public class Place {
         this.lang = lang;
         this.name = name;
         this.zoom = zoom;
+        this.marker = new MarkerOptions().position(new LatLng(lat, lang)).title(name);
+    }
+
+    public Place(Double lang, Double lat, String info, float zoom, String name) {
+        this.lang = lang;
+        this.lat = lat;
+        this.info = info;
+        this.zoom = zoom;
+        this.name = name;
         this.marker = new MarkerOptions().position(new LatLng(lat, lang)).title(name);
     }
 

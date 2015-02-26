@@ -5,7 +5,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="asmirza.uniherts.CardView"
-    android:clickable="false"
+    android:clickable="true"
+    android:onClick="openFullBarcode"
     android:screenOrientation="landscape">
 
 
@@ -28,7 +29,6 @@
             android:layout_above="@+id/card_barcode"
             android:layout_alignParentStart="true"
             android:clickable="true"
-            android:onClick="openBigCard"
             android:nestedScrollingEnabled="true" />
 
         <TextView

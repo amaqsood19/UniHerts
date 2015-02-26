@@ -5,12 +5,14 @@
     <string name="title_activity_uni_map">Map</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="map_button">Map</string>
+    <string name="static_map_button">PDF Map</string>
     <string name="id_button">ID Card</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_sign_up">SignUp</string>
-    <string name="buildings">View Buildings</string>
+    <string name="places">View Places</string>
     <string name="rooms">Rooms</string>
     <string name="search_hint_map">Enter Building Name</string>
+    <string name="search_title">Search Buildings</string>
     <string name="login">Log in</string>
     <string name="signup">Sign up</string>
     <string name="powered_by">Powered by</string>
@@ -31,30 +33,38 @@
     <string name="service_name">CardEmulation Sample</string>
     <string name="card_title">Sample Loyalty Card</string>
     <string name="account_number">Student Number</string>
-    <string name="intro_message">
-<![CDATA[
-
-
-            This sample demonstrates how to emulate an NFC card, using the "host card emulation"
-            feature added in Android 4.4. This sample makes the device appear as a loyalty card
-            whenever the screen is on and the user taps their device on an appropriately configured
-            NFC reader.
-
-            The "CardReader" sample can be used to read the loyalty card implemented in this sample.
-
-
-        ]]>
-    </string>
     <string name="sample_show_log">Show Log</string>
     <string name="sample_hide_log">Hide Log</string>
-    <string name="title_activity_map_search">MapSearch</string>
+    <string name="title_activity_search_places">Search Places</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_map_buildings">MapBuildings</string>
+    <string name="title_activity_list_places">List Places</string>
     <string name="title_activity_card_view">CardView</string>
     <string name="title_activity_student_idmain">StudentIDMain</string>
     <string name="title_activity_student_idsettings">StudentIDSettings</string>
     <string name="title_activity_fullscreen_barcode">FullscreenBarcode</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_static_map">StaticMap</string>
+    <string name="title_activity_barcode">Barcode</string>
+
+    <!-- Strings related to login -->
+    <string name="title_activity_login">Log in</string>
+    <string name="title_activity_signup">Sign up</string>
+    <string name="prompt_firstname">First Name</string>
+    <string name="prompt_lastname">Last Name</string>
+    <string name="prompt_studentid">Student ID</string>
+    <string name="prompt_card_barcode">Scan you Student ID Card </string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_again">Password Again</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">enter a username</string>
+    <string name="error_blank_password">enter a password</string>
+    <string name="error_mismatched_passwords">enter the same password twice</string>
+    <string name="error_join">", and "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in…</string>
+    <string name="progress_signup">Signing you up…</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 </resources>

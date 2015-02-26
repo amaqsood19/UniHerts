@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dip"
+    android:background="@color/background_floating_material_light"
+    android:orientation="vertical"
+    android:id="@+id/room_list_item_view">
+
+
+    <TextView
+        android:id="@+id/room_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_overlay"
+        android:textSize="17dip" />
+
+</LinearLayout>

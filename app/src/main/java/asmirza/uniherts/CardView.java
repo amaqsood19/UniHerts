@@ -1,9 +1,11 @@
 package asmirza.uniherts;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,8 +13,13 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
+
 
 public class CardView extends Activity {
+
+
+    public final static String FULL_BARCODE_BITMAP = "asmirza.uniherts.FULL_BARCODE_BITMAP";
 
 
     String student_id;
@@ -22,6 +29,7 @@ public class CardView extends Activity {
     String cardBarcode;
 
     Bitmap barcode_bitmap;
+    Bitmap full_barcode_bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +72,30 @@ public class CardView extends Activity {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+
+
     }
 
 
 
 
-    public void openBigCard() {
-//        Intent intent = new Intent(this, FullscreenBarcode.class);
-//        startActivity(intent);
+    public void openFullBarcode(View view) {
+        Intent intent = new Intent(this, Barcode.class);
+
+        try {
+
+            full_barcode_bitmap = BarCodeEncoder.encodeAsBitmap(cardBarcode, BarcodeFormat.CODE_39, 1000, 650);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        full_barcode_bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+        intent.putExtra(FULL_BARCODE_BITMAP,bytes );
+
+        startActivity(intent);
     }
 
     private String capitalize(String line)
