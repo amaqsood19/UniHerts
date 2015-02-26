@@ -1,16 +1,46 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="55dip"
-    android:background="@color/background_floating_material_light"
-    android:orientation="vertical"
-    android:id="@+id/room_list_item_view">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
 
+
+    <ImageView
+        android:id="@+id/room_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:src="@raw/school" />
 
     <TextView
-        android:id="@+id/room_text_view"
+        android:id="@+id/room_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black_overlay"
-        android:textSize="17dip" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/room_icon"
+        android:gravity="center_vertical"
+        android:text="Location"
+        android:textSize="16sp"
+        android:layout_weight="1"
+        android:textStyle="bold"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/room_description"
+        android:layout_width="fill_parent"
+        android:layout_height="22dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/room_icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="12sp" />
+
+
+
+
+</RelativeLayout>

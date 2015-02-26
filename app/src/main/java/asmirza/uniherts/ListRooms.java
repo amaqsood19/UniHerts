@@ -10,53 +10,54 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.ExpandableListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ListRooms extends Activity {
 
-    List<Place> roomsList;
+    ArrayList<Building> roomsList;
     RoomsListAdapter adapter;
+    ExpandableListView lv;
     EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_buildings);
+        setContentView(R.layout.activity_list_rooms);
 
 
-        ListView lv = (ListView) findViewById(R.id.list_places);
+        lv =  (ExpandableListView)  findViewById(R.id.rooms_list_view);
 
-        roomsList = new ArrayList<Place>(MapXML.buildings.values());
+        roomsList = new ArrayList<Building>(MapXML.buildings.values());
 
         adapter = new RoomsListAdapter(roomsList,this);
         lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parentAdapter, View view, int position,
-                                    long id) {
-                // We know the View is a textView so we can cast it
-                RelativeLayout placeItemLayout = (RelativeLayout) view;
+        expandAll();
 
+        lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-                // Getting the Country TextView
-                TextView placeName = (TextView) placeItemLayout.getChildAt(1);
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+
+                //get the group header
+                Building building = roomsList.get(groupPosition);
+                //get the child info
+                Room room = building.getRooms().get(childPosition);
+
                 Intent intent = new Intent();
-                intent.putExtra("place", placeName.getText().toString());
+                intent.putExtra("place", room.getName());
                 setResult(RESULT_OK, intent);
                 finish();
+                return true;
             }
         });
 
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
+        inputSearch = (EditText) findViewById(R.id.inputSearchRooms);
 
         // TextFilter
         lv.setTextFilterEnabled(true);
@@ -69,6 +70,7 @@ public class ListRooms extends Activity {
                     adapter.resetData();
                 }
                 adapter.getFilter().filter(s.toString());
+                expandAll();
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
@@ -80,7 +82,21 @@ public class ListRooms extends Activity {
         });
     }
 
+    //method to expand all groups
+    private void expandAll() {
+        int count = adapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            lv.expandGroup(i);
+        }
+    }
 
+    //method to collapse all groups
+    private void collapseAll() {
+        int count = adapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            lv.collapseGroup(i);
+        }
+    }
 
 
     @Override

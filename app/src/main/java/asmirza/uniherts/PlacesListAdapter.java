@@ -98,6 +98,8 @@ public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable
                 }
                 results.values = nPlaceList;
                 results.count = nPlaceList.size();
+
+
             }
             return results;
         }

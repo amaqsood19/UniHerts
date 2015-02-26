@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class MapXML {
 
     static XmlPullParser xpp;
-    static HashMap<String,Place> buildings = new HashMap<String,Place>();
+    static HashMap<String, Building> buildings = new HashMap<>();
 
     public MapXML(XmlPullParser xpp) {
         this.xpp = xpp;
@@ -137,11 +137,11 @@ public class MapXML {
 
     }
 
-    public HashMap<String, Place> getBuildings() {
+    public HashMap<String, Building> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(HashMap<String, Place> buildings) {
+    public void setBuildings(HashMap<String, Building> buildings) {
         this.buildings = buildings;
     }
 

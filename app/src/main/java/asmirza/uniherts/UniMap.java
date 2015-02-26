@@ -180,13 +180,13 @@ public class UniMap extends FragmentActivity {
 
 
 
-    private void plotMarkers(HashMap<String,Place> places)
+    private void plotMarkers(HashMap<String, Building> places)
     {
         IconGenerator iconFactory = new IconGenerator(this);
 
-        Iterator<Map.Entry<String, Place>> iterator = places.entrySet().iterator() ;
+        Iterator<Map.Entry<String, Building>> iterator = places.entrySet().iterator() ;
         while(iterator.hasNext()) {
-            Map.Entry<String, Place> placeEntry = iterator.next();
+            Map.Entry<String, Building> placeEntry = iterator.next();
             Building building = (Building) placeEntry.getValue();
 
             ArrayList<Room> rooms = building.getRooms();
@@ -202,7 +202,7 @@ public class UniMap extends FragmentActivity {
                 {
                     System.out.println(room.getName());
 
-                    iconFactory.setColor(Color.CYAN);
+                    iconFactory.setColor(Color.rgb(52, 181, 229));
 
                     mMap.addMarker(room.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(room.getType()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(room.getName()))));
                 }
@@ -227,9 +227,9 @@ public class UniMap extends FragmentActivity {
                 Intent intent = new Intent(this, ListBuildings.class);
                 startActivityForResult(intent, 1);
                 return true;
-            case R.id.rooms:
-                Intent listRooms = new Intent(this, ListRooms.class);
-                startActivityForResult(listRooms, 1);
+            case R.id.rooms_menu_button:
+                Intent listRoomsIntent = new Intent(this, ListRooms.class);
+                startActivityForResult(listRoomsIntent, 1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -238,10 +238,47 @@ public class UniMap extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Place place = null;
+
         if (data == null) {return;}
         String name = data.getStringExtra("place");
-        zoomTo(mapXML.getBuildings().get(name));
 
+        Iterator<Map.Entry<String, Building>> iterator = mapXML.getBuildings().entrySet().iterator() ;
+        while(iterator.hasNext()) {
+            Map.Entry<String, Building> placeEntry = iterator.next();
+            Building building = (Building) placeEntry.getValue();
+
+            ArrayList<Room> rooms = building.getRooms();
+            System.out.println("" + building.getName());
+
+            if (name.contentEquals(building.getName()))
+            {
+                place = building;
+                break;
+            }
+            else
+            {
+                if (rooms.size() != 0)
+                {
+                    for (Room room : building.getRooms())
+                    {
+                        if (name.contentEquals(room.getName()))
+                        {
+                            place = room;
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
+        if (place != null)
+        {
+            zoomTo(place);
+        }
     }
 
     private void BitmapDescriptor(String type) {

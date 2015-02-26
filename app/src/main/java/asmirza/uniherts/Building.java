@@ -11,7 +11,7 @@ public class Building extends Place {
     private String address;
 
 
-    public Building(Double lat, Double lang, String name, float zoom, String address, ArrayList<Room> rooms) {
+    public Building(Double lat, Double lang, String name,String address, float zoom, ArrayList<Room> rooms) {
         super(lat, lang, name, zoom);
         this.address = address;
         this.rooms = rooms;
@@ -20,6 +20,7 @@ public class Building extends Place {
     public Building(Double lat, Double lang, String name, String address, float zoom) {
         super(lat, lang, name, zoom);
         this.address = address;
+        this.rooms = new ArrayList<Room>();
     }
 
     public ArrayList<Room> getRooms() {

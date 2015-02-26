@@ -78,8 +78,12 @@
             android:label="@string/title_activity_dispatch" >
         </activity>
         <activity
-            android:name=".ListPlaces"
-            android:label="@string/title_activity_list_places" >
+            android:name=".ListBuildings"
+            android:label="@string/title_activity_list_buildings" >
+        </activity>
+        <activity
+            android:name=".ListRooms"
+            android:label="@string/title_activity_list_rooms" >
         </activity>
         <activity
             android:name=".CardView"

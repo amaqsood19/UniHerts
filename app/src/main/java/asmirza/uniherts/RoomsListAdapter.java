@@ -1,37 +1,43 @@
 package asmirza.uniherts;
 
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class RoomsListAdapter extends BaseExpandableListAdapter {
+public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filterable {
 
+    private ArrayList<Building> buildingList;
     private Context context;
-    private ArrayList<Building> buildings;
-    public RoomsListAdapter(ArrayList<Building> buildings)
-    {
-        this.buildings = buildings;
+    private Filter roomsFilter;
+    private ArrayList<Building> origBuildingList;
+
+    public RoomsListAdapter(ArrayList<Building> buildings, Context ctx) {
+        this.buildingList = buildings;
+        this.origBuildingList = buildings;
+        this.context = ctx;
     }
 
     public void addItem(Room room, Building building) {
-        if (!buildings.contains(building)) {
-            buildings.add(building);
+        if (!buildingList.contains(building)) {
+            buildingList.add(building);
         }
-        int index = buildings.indexOf(building);
-        ArrayList<Room> rooms = buildings.get(index).getRooms();
+        int index = buildingList.indexOf(building);
+        ArrayList<Room> rooms = buildingList.get(index).getRooms();
         rooms.add(room);
-        buildings.get(index).setRooms(rooms);
+        buildingList.get(index).setRooms(rooms);
     }
+
     public Object getChild(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub
-        ArrayList<Room> roomsList = buildings.get(groupPosition).getRooms();
+        ArrayList<Room> roomsList = buildingList.get(groupPosition).getRooms();
         return roomsList.get(childPosition);
     }
 
@@ -47,16 +53,18 @@ public class RoomsListAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             view = infalInflater.inflate(R.layout.room_list_item, null);
         }
-        TextView tv = (TextView) view.findViewById(R.id.room_text_view);
-        tv.setText(child.getName().toString());
-        tv.setTag(child.getType());
+        TextView tvRoom = (TextView) view.findViewById(R.id.room_name);
+        TextView tvDesc = (TextView) view.findViewById(R.id.room_description);
+        tvRoom.setText(child.getName().toString());
+        tvDesc.setText(child.getType());
+        //tvRoom.setTag(child.getType());
         // TODO Auto-generated method stub
         return view;
     }
 
     public int getChildrenCount(int groupPosition) {
         // TODO Auto-generated method stub
-        ArrayList<Room> chList = buildings.get(groupPosition).getRooms();
+        ArrayList<Room> chList = buildingList.get(groupPosition).getRooms();
 
         return chList.size();
 
@@ -64,12 +72,12 @@ public class RoomsListAdapter extends BaseExpandableListAdapter {
 
     public Object getGroup(int groupPosition) {
         // TODO Auto-generated method stub
-        return buildings.get(groupPosition);
+        return buildingList.get(groupPosition);
     }
 
     public int getGroupCount() {
         // TODO Auto-generated method stub
-        return buildings.size();
+        return buildingList.size();
     }
 
     public long getGroupId(int groupPosition) {
@@ -90,6 +98,20 @@ public class RoomsListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
+    public void resetData() {
+        buildingList = origBuildingList;
+    }
+
+    /* *********************************
+    * We use the holder pattern
+    * It makes the view faster and avoid finding the component
+    * **********************************/
+    private static class PlaceHolder {
+        public TextView placeNameView;
+        public TextView distView;
+    }
+
+
     public boolean hasStableIds() {
         // TODO Auto-generated method stub
         return true;
@@ -100,6 +122,64 @@ public class RoomsListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+
+
+    /*
+* We create our filter
+*/
+    @Override
+    public Filter getFilter() {
+        if (roomsFilter == null)
+            roomsFilter = new RoomFilter();
+        return roomsFilter;
+    }
+    private class RoomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            // We implement here the filter logic
+            if (constraint == null || constraint.length() == 0) {
+                // No filter implemented we return all the list
+                results.values = origBuildingList;
+                results.count = origBuildingList.size();
+            }
+            else {
+                // We perform filtering operation
+                ArrayList<Building> nBuildingList = new ArrayList<Building>();
+                for (Building building : origBuildingList) {
+
+                    ArrayList<Room> roomList = building.getRooms();
+                    ArrayList<Room> newRoomList = new ArrayList<Room>();
+                    for (Room room : roomList) {
+                        if (room.getName().toUpperCase().contains(constraint.toString().toUpperCase())) {
+                            newRoomList.add(room);
+                        }
+                    }
+                    if (newRoomList.size() > 0) {
+                        Building nBuilding = new Building(building.getLat(), building.getLat(),building.getName(), building.getAddress(), building.getZoom(),newRoomList);
+                        nBuildingList.add(nBuilding);
+                    }
+
+                }
+                results.values = nBuildingList;
+                results.count = nBuildingList.size();
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            // Now we have to inform the adapter about the new list filtered
+            if (results.count == 0)
+                notifyDataSetInvalidated();
+            else {
+                buildingList = (ArrayList<Building>) results.values;
+                notifyDataSetChanged();
+            }
+        }
+    }
 }
 
 
