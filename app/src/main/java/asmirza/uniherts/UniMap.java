@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.directions.route.Route;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,8 +20,10 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import java.util.ArrayList;
@@ -26,13 +31,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class UniMap extends FragmentActivity {
+public class UniMap extends FragmentActivity implements RoutingListener {
 
     static final LatLng collegeLane = new LatLng(51.752375,-0.241353);
 
-    GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
-    MapXML mapXML;
+    protected GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    protected LatLng start;
+    protected LatLng end;
+    protected MapXML mapXML;
 
 
 
@@ -125,22 +131,25 @@ public class UniMap extends FragmentActivity {
 
         //addOverlay();
 
-        mapXML = new MapXML(getResources().getXml(R.xml.building_markers));
-
-
-
-
-        mapXML.readXML();
+        mapXML = MapXML.getInstance();
 
         //getMakersfromXML(buildingMarkers);
 
-        plotMarkers(mapXML.getBuildings());
+        plotMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
 
         set3DMap(true);
         setIndoorMap(true);
 
 
+    }
 
+    public void showDirections(LatLng start,LatLng end){
+        start = new LatLng(51.753167, -0.242132);
+        end = new LatLng(51.752429, -0.242103);
+
+        Routing routing = new Routing(Routing.TravelMode.WALKING);
+        routing.registerListener(this);
+        routing.execute(start, end);
 
     }
 
@@ -149,7 +158,10 @@ public class UniMap extends FragmentActivity {
         mMap.animateCamera(intialCameraUpdate);
     }
 
+    public void showMarkers()
+    {
 
+    }
 
     private void addOverlay() {
 
@@ -293,5 +305,34 @@ public class UniMap extends FragmentActivity {
         mMap.setIndoorEnabled(value);
     }
 
+    @Override
+    public void onRoutingFailure() {
+        // The Routing request failed
+    }
 
+    @Override
+    public void onRoutingStart() {
+        // The Routing Request starts
+    }
+
+    @Override
+    public void onRoutingSuccess(PolylineOptions mPolyOptions,Route route) {
+        PolylineOptions polyoptions = new PolylineOptions();
+        polyoptions.color(Color.BLUE);
+        polyoptions.width(10);
+        polyoptions.addAll(mPolyOptions.getPoints());
+        mMap.addPolyline(polyoptions);
+
+        // Start marker
+        MarkerOptions options = new MarkerOptions();
+        options.position(start);
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+        mMap.addMarker(options);
+
+        // End marker
+        options = new MarkerOptions();
+        options.position(end);
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
+        mMap.addMarker(options);
+    }
 }

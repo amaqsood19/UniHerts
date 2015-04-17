@@ -1,1 +1,1 @@
-include ':app', 'android-maps-utils'
+include ':app', 'android-maps-utils', 'app:libraries:google-directions'

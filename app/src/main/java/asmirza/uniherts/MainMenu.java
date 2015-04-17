@@ -91,6 +91,25 @@ public class MainMenu extends Activity {
 
     }
 
+
+    public void openFood(View view) {
+        Intent intent = new Intent(this, Food.class);
+        startActivity(intent);
+
+    }
+
+    public void openNews(View view) {
+        Intent intent = new Intent(this, FacebookNews.class);
+        startActivity(intent);
+
+    }
+
+    public void openParkingMap(View view) {
+        Intent intent = new Intent(this, ParkingMap.class);
+        startActivity(intent);
+
+    }
+
     public void openStaticMap(View view) {
 
         Intent intent = new Intent(this, StaticMap.class);

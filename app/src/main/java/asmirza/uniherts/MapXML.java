@@ -1,5 +1,7 @@
 package asmirza.uniherts;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.HashMap;
@@ -9,14 +11,24 @@ import java.util.HashMap;
  */
 public class MapXML {
 
-    static XmlPullParser xpp;
-    static HashMap<String, Building> buildings = new HashMap<>();
+    private static MapXML instanceMapXML;
+    HashMap<String, Building> buildings = new HashMap<>();
+    HashMap<String, Parking> parkings = new HashMap<>();
 
-    public MapXML(XmlPullParser xpp) {
-        this.xpp = xpp;
+    public MapXML() {
     }
 
-    public void readXML()  {
+    public static MapXML getInstance()
+    {
+        if (instanceMapXML == null)
+        {
+            instanceMapXML = new MapXML();
+        }
+        return instanceMapXML;
+    }
+
+
+    public void readXMLBuildingMarkers(XmlPullParser xpp)  {
 
         Building building;
         Room room;
@@ -137,8 +149,103 @@ public class MapXML {
 
     }
 
+    public void readXMLParkingMarkers(XmlPullParser xpp)  {
+
+        Log.i("readXMLParkingMarkers","METHOD");
+        String name = "";
+        String address = "";
+        Double lat = 0.0;
+        Double lang = 0.0;
+        float zoom = 0;
+        String spaceDetails= "";
+        String code= "";
+        String type= "";
+        String features= "";
+        String restrictionsTime= "";
+        String parkingRestrictions= "";
+        Parking parking = new Parking();
+
+        int event;
+        String text=null;
+        try {
+            int eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                String tagname = xpp.getName();
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        if (tagname.equalsIgnoreCase("parking")) {
+                            // create a new instance of parking
+                            parking = new Parking();
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        text = xpp.getText();
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        if (tagname.equalsIgnoreCase("parking")) {
+                            // add employee object to list
+                            parking = new Parking(lat,lang,zoom,name,code,spaceDetails,type,features, address, restrictionsTime, parkingRestrictions);
+                            Log.i("PARKING CREATED",parking.toString());
+                            parkings.put(parking.getName(), parking);
+                        } else if (tagname.equalsIgnoreCase("name")) {
+                            name = text;
+                        } else if (tagname.equalsIgnoreCase("lat")) {
+                            lat = Double.parseDouble(text);
+                        } else if (tagname.equalsIgnoreCase("lang")) {
+                            lang = Double.parseDouble(text);
+                        } else if (tagname.equalsIgnoreCase("address")) {
+                            address = text;
+                        } else if (tagname.equalsIgnoreCase("zoom")) {
+                            zoom = Float.valueOf(text);
+                        }  else if (tagname.equalsIgnoreCase("code")) {
+                            code = text;
+                        } else if (tagname.equalsIgnoreCase("type")) {
+                            type = text;
+                        }else if (tagname.equalsIgnoreCase("spaceDetails")) {
+                            spaceDetails = text;
+                        }else if (tagname.equalsIgnoreCase("features")) {
+                            features = text;
+                        } else if (tagname.equalsIgnoreCase("restrictionsTime")) {
+                            restrictionsTime = text;
+                        } else if (tagname.equalsIgnoreCase("parkingRestrictions")) {
+                            parkingRestrictions = text;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                eventType = xpp.next();
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    public HashMap<String, Building> getBuildings(XmlPullParser xpp) {
+        if (buildings.size()== 0) {
+            readXMLBuildingMarkers(xpp);
+        }
+        return buildings;
+    }
+
     public HashMap<String, Building> getBuildings() {
         return buildings;
+    }
+
+    public HashMap<String, Parking> getParkings(XmlPullParser xpp) {
+        if (parkings.size()== 0) {
+            readXMLParkingMarkers(xpp);
+        }
+        return parkings;
     }
 
     public void setBuildings(HashMap<String, Building> buildings) {

@@ -32,7 +32,9 @@ public class ListRooms extends Activity {
 
         lv =  (ExpandableListView)  findViewById(R.id.rooms_list_view);
 
-        roomsList = new ArrayList<Building>(MapXML.buildings.values());
+        MapXML mapXML = MapXML.getInstance();
+
+        roomsList = new ArrayList<Building>(mapXML.getBuildings().values());
 
         adapter = new RoomsListAdapter(roomsList,this);
         lv.setAdapter(adapter);

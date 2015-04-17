@@ -67,5 +67,10 @@
     <string name="progress_login">Logging you in…</string>
     <string name="progress_signup">Signing you up…</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="aiddescription">StudentID</string>
+    <string name="title_activity_food">Food</string>
+    <string name="title_activity_facebook_news">FacebookNews</string>
+    <string name="facebook_app_id">1399663470355158</string>
+    <string name="title_activity_parking_map">ParkingMap</string>
 
 </resources>

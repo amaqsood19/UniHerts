@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="500dip"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/news_headline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="News Headline"
+        android:maxWidth="100dip"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:scaleType="centerInside"
+        android:textStyle="bold"
+        android:adjustViewBounds="true"/>
+
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:layout_gravity="center"
+        android:background="#ff53d3ff"
+        android:padding="1dp"
+        android:src="@raw/university"
+        android:layout_below="@+id/news_headline"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/news_picture_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Picture Name"
+        android:textSize="12sp"
+        android:layout_below="@+id/news_image"
+        android:layout_alignParentStart="true"
+        android:autoText="false" />
+
+    <TextView
+        android:id="@+id/news_picture_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="12sp"
+        android:layout_below="@+id/news_picture_name"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/news_date_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Date/Time"
+        android:textSize="10sp"
+        android:layout_below="@+id/news_picture_description"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

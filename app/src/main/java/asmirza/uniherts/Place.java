@@ -15,6 +15,10 @@ public class Place {
     private String info;
     private MarkerOptions marker;
 
+    public Place() {
+
+    }
+
 
     public Place(Double lat, Double lang, String name, float zoom) {
         this.lat = lat;

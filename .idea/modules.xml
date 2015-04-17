@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UniHerts.iml" filepath="$PROJECT_DIR$/UniHerts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-maps-utils/android-maps-utils.iml" filepath="$PROJECT_DIR$/android-maps-utils/android-maps-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libraries/android-maps-utils/android-maps-utils.iml" filepath="$PROJECT_DIR$/app/libraries/android-maps-utils/android-maps-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/libraries/google-directions/google-directions.iml" filepath="$PROJECT_DIR$/app/libraries/google-directions/google-directions.iml" />
     </modules>
   </component>
 </project>

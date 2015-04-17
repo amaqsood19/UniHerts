@@ -54,7 +54,7 @@ public class CardService extends HostApduService {
 
     /**
      * Called if the connection to the NFC card is lost, in order to let the application know the
-     * cause for the disconnection (either a lost link, or another AID being selected by the
+     * cause for the disconnection (either a lost pictureLink, or another AID being selected by the
      * reader).
      *
      * @param reason Either DEACTIVATION_LINK_LOSS or DEACTIVATION_DESELECTED
