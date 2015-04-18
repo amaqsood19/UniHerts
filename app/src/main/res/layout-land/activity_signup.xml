@@ -1,14 +1,18 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SignUpActivity" >
+    tools:context=".SignUpActivity">
     <!-- Login form -->
     <ScrollView
         android:id="@+id/signup_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
+
         <LinearLayout
-            style="@style/LoginFormContainer"
-            android:orientation="vertical" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
             <EditText
                 android:id="@+id/first_name_edit_text"
                 android:layout_width="match_parent"
@@ -17,6 +21,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
+
             <EditText
                 android:id="@+id/last_name_edit_text"
                 android:layout_width="match_parent"
@@ -25,34 +30,36 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
+
             <EditText
                 android:id="@+id/studentid_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_studentid"
+                android:inputType="number"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:inputType="number" />
+                android:singleLine="true" />
 
             <Button
+                android:id="@+id/scan_card_button"
                 android:layout_width="559dp"
                 android:layout_height="wrap_content"
-                android:text="Scan Card"
-                android:id="@+id/scan_card_button"
                 android:layout_gravity="right"
-                android:onClick="scanCard" />
+                android:onClick="scanCard"
+                android:text="Scan Card" />
 
             <EditText
                 android:id="@+id/card_barcode_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_card_barcode"
-                android:maxLines="1"
-                android:singleLine="true"
+                android:clickable="true"
                 android:editable="false"
                 android:enabled="true"
-                android:clickable="true"
-                android:onClick="scanCard" />
+                android:hint="@string/prompt_card_barcode"
+                android:maxLines="1"
+                android:onClick="scanCard"
+                android:singleLine="true" />
+
             <EditText
                 android:id="@+id/username_edit_text"
                 android:layout_width="match_parent"
@@ -61,6 +68,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
+
             <EditText
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
@@ -69,17 +77,19 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
+
             <EditText
                 android:id="@+id/password_again_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password_again"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:imeActionId="@+id/edittext_action_signup"
                 android:imeActionLabel="@string/signup"
-                android:imeOptions="actionUnspecified" />
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
             <Button
                 android:id="@+id/action_button"
                 android:layout_width="wrap_content"

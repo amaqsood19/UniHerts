@@ -10,6 +10,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file('C:/Users/ASMIRZA/keystores/android.jks')
+            storePassword 'Faafaa1k'
+            keyAlias 'AsMirzaAndroidKey'
+            keyPassword 'Faafaa1a'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
