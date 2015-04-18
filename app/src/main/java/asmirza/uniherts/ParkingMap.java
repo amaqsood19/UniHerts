@@ -7,31 +7,38 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
 public class ParkingMap extends FragmentActivity {
 
-    static final LatLng collegeLane = new LatLng(51.752375,-0.241353);
+    static final LatLng collegeLane = new LatLng(51.752375, -0.241353);
+
 
     protected GoogleMap mMap; // Might be null if Google Play services APK is not available.
     protected LatLng start;
     protected LatLng end;
     protected MapXML mapXML;
-
-
+    private Marker marker;
+    private Hashtable<String, Parking> parkingMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,28 +90,29 @@ public class ParkingMap extends FragmentActivity {
      */
 
 
-
-
-    private void createBoundary()  {
+    private void createBoundary() {
 
         Polygon polygon = mMap.addPolygon(new PolygonOptions()
                 .add(
-                        new LatLng(-0.244145,51.755648),
-                        new LatLng(-0.234189,51.752912),
-                        new LatLng(-0.234103,51.749883),
-                        new LatLng(-0.239038,51.749750),
-                        new LatLng(-0.241227,51.748395),
-                        new LatLng(-0.242558,51.748050),
-                        new LatLng(-0.243931,51.750547),
-                        new LatLng(-0.244660,51.752673),
-                        new LatLng(-0.244575,51.754426),
-                        new LatLng(-0.244145,51.755648))
+                        new LatLng(-0.244145, 51.755648),
+                        new LatLng(-0.234189, 51.752912),
+                        new LatLng(-0.234103, 51.749883),
+                        new LatLng(-0.239038, 51.749750),
+                        new LatLng(-0.241227, 51.748395),
+                        new LatLng(-0.242558, 51.748050),
+                        new LatLng(-0.243931, 51.750547),
+                        new LatLng(-0.244660, 51.752673),
+                        new LatLng(-0.244575, 51.754426),
+                        new LatLng(-0.244145, 51.755648))
                 .strokeColor(Color.BLUE)
                 .fillColor(Color.LTGRAY));
     }
 
 
     private void setUpMap() {
+
+        parkingMarkers = new Hashtable<String, Parking>();
+
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
 
@@ -112,7 +120,7 @@ public class ParkingMap extends FragmentActivity {
         mMap.setMyLocationEnabled(true);
 
 
-        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 12);
+        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 18);
         mMap.animateCamera(intialCameraUpdate);
 
 
@@ -121,21 +129,43 @@ public class ParkingMap extends FragmentActivity {
 
         plotMarkers(mapXML.getParkings(getResources().getXml(R.xml.parking_markers)));
 
+        // Setting a custom info window adapter for the google map
+        mMap.setInfoWindowAdapter(new ParkingInfoWindowAdapter());
+
 
     }
 
-    private void plotMarkers(HashMap<String, Parking> places)
-    {
+    private BitmapDescriptor getParkingIcon(Parking p) {
+        int type = p.getType();
+        BitmapDescriptor icon = null;
+
+        if (type == 1) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.parking_yellow);
+        } else if (type == 2) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.parking_green);
+        } else if (type == 3) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.parking_purple);
+        } else if (type == 4) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.parking_blue);
+        }
+        return icon;
+
+
+    }
+
+    private void plotMarkers(HashMap<String, Parking> places) {
         IconGenerator iconFactory = new IconGenerator(this);
         System.out.println(places.values().toString());
-        Iterator<Map.Entry<String, Parking>> iterator = places.entrySet().iterator() ;
-        while(iterator.hasNext()) {
+        Iterator<Map.Entry<String, Parking>> iterator = places.entrySet().iterator();
+        while (iterator.hasNext()) {
             Map.Entry<String, Parking> placeEntry = iterator.next();
             Parking parking = (Parking) placeEntry.getValue();
 
             System.out.println("" + parking.getName());
 
-            mMap.addMarker(parking.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(parking.getType()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(parking.getCode()))));
+            Marker parkingMarker = mMap.addMarker(parking.getMarker().snippet(parking.getTypeString()).icon(getParkingIcon(parking)));
+            parkingMarkers.put(parkingMarker.getId(), parking);
+
 
         }
 
@@ -147,7 +177,6 @@ public class ParkingMap extends FragmentActivity {
         inflater.inflate(R.menu.menu_map, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -166,7 +195,46 @@ public class ParkingMap extends FragmentActivity {
         }
     }
 
+    private class ParkingInfoWindowAdapter implements InfoWindowAdapter {
 
+        private View view;
+
+        public ParkingInfoWindowAdapter() {
+            view = getLayoutInflater().inflate(R.layout.parking_marker_info,
+                    null);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+            ParkingMap.this.marker = marker;
+
+            Parking parking = null;
+
+            if (marker.getId() != null && parkingMarkers != null && parkingMarkers.size() > 0) {
+                if (parkingMarkers.get(marker.getId()) != null &&
+                        parkingMarkers.get(marker.getId()) != null) {
+                    parking = parkingMarkers.get(marker.getId());
+                }
+            }
+
+            TextView park_name_tv = (TextView) view.findViewById(R.id.park_name_tv);
+            TextView park_type_tv = (TextView) view.findViewById(R.id.park_type_tv);
+            TextView park_restrictions_time_tv = (TextView) view.findViewById(R.id.park_restrictions_time_tv);
+
+            park_name_tv.setText(parking.getName());
+            park_type_tv.setText(parking.getTypeString());
+            park_restrictions_time_tv.setText(parking.getRestrictionsTime());
+
+            return view;
+
+        }
+
+        @Override
+        public View getInfoWindow(final Marker marker) {
+            return null;
+        }
+    }
 
 
 }

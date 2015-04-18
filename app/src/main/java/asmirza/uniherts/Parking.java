@@ -5,27 +5,61 @@ package asmirza.uniherts;
  */
 public class Parking extends Place {
 
-        private String spaceDetails;
-        private String code;
-        private String type;
-        private String features;
-        private String address;
-        private String restrictionsTime;
-        private String parkingRestrictions;
+    private String address;
+    private String code;
+    private int type;
+    private Boolean isDisable;
+    private String spaceDetails;
+    private String features;
+    private String parkingRestrictions;
+    private String restrictionsTime;
 
-    public Parking(Double lat, Double lang, float zoom, String name, String code, String spaceDetails, String type, String features, String address, String restrictionsTime, String parkingRestrictions) {
-        super(lat, lang,  name, zoom);
-        this.code = code;
-        this.spaceDetails = spaceDetails;
-        this.type = type;
-        this.features = features;
+    public Parking(Double lat, Double lang, String name, float zoom, String address, String code, int type, Boolean isDisable, String spaceDetails, String features, String parkingRestrictions, String restrictionsTime) {
+        super(lat, lang, name, zoom);
         this.address = address;
-        this.restrictionsTime = restrictionsTime;
+        this.code = code;
+        this.type = type;
+        this.isDisable = isDisable;
+        this.spaceDetails = spaceDetails;
+        this.features = features;
         this.parkingRestrictions = parkingRestrictions;
+        this.restrictionsTime = restrictionsTime;
     }
 
     public Parking() {
 
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getTypeString() {
+        String typeString = "";
+
+        if (type == 1) {
+            typeString = "Visitor Parking";
+        } else if (type == 2) {
+            typeString = "Student Parking (Pay and Display)";
+        } else if (type == 3) {
+            typeString = "Student Residence Parking";
+        } else if (type == 4) {
+            typeString = "Staff Parking (Fee Paying)";
+        }
+
+        return typeString;
+    }
+
+    public Boolean getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(Boolean isDisable) {
+        this.isDisable = isDisable;
     }
 
     public String getSpaceDetails() {
@@ -42,14 +76,6 @@ public class Parking extends Place {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getFeatures() {
@@ -94,6 +120,6 @@ public class Parking extends Place {
                 ", address='" + address + '\'' +
                 ", parkingRestrictions='" + parkingRestrictions + '\'' +
                 ", restrictionsTime='" + restrictionsTime + '\'' +
-                "} " ;
+                "} ";
     }
 }

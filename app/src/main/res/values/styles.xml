@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-    Base application theme, dependent on API level. This theme is replaced
-    by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo">
-        <!--
-        Theme customizations available in newer API levels can go in
-        res/values-vXX/styles.xml, while customizations related to
-        backward-compatibility can go here.
-        -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat" />
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDarker</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
     </style>
+
+    <color name="primary">#457C50</color>
+    <color name="primaryDarker">#580C0C</color>
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
@@ -60,8 +62,10 @@
         <item name="android:actionDropDownStyle">@style/DropDownNav.Uniherts</item>
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Uniherts</item>
         <item name="android:actionModeBackground">@drawable/cab_background_top_uniherts</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_uniherts</item>
-        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Uniherts</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_uniherts
+        </item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Uniherts
+        </item>
 
 
     </style>
@@ -111,5 +115,6 @@
     </style>
 
     <style name="ButtonBarButton" />
+
 
 </resources>

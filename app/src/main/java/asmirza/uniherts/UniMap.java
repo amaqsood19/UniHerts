@@ -1,12 +1,20 @@
 package asmirza.uniherts;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.directions.route.Route;
 import com.directions.route.Routing;
@@ -15,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -33,13 +42,19 @@ import java.util.Map;
 
 public class UniMap extends FragmentActivity implements RoutingListener {
 
-    static final LatLng collegeLane = new LatLng(51.752375,-0.241353);
+    private final LatLng collegeLane = new LatLng(51.752375, -0.241353);
 
     protected GoogleMap mMap; // Might be null if Google Play services APK is not available.
     protected LatLng start;
     protected LatLng end;
     protected MapXML mapXML;
-
+    Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+    private String[] mLayersTitlesList;
 
 
     @Override
@@ -47,7 +62,76 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uni_map);
         setUpMapIfNeeded();
+        mLayersTitlesList = getResources().getStringArray(R.array.map_layers_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.map_drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mLayersTitlesList));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar,
+                R.string.drawer_open, R.string.drawer_close
+        );
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
+
+
+    }
+
+    private void selectItem(int position) {
+        // update the main content by replacing fragments
+//        Fragment fragment = new PlanetFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+//        fragment.setArguments(args);
+//
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+//
+//        // update selected item and title, then close the drawer
+//        mDrawerList.setItemChecked(position, true);
+//        setTitle(mPlanetTitles[position]);
+//        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getActionBar().setTitle(mTitle);
+    }
+
+    /**
+     * When using the ActionBarDrawerToggle, you must call it during
+     * onPostCreate() and onConfigurationChanged()...
+     */
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -92,58 +176,37 @@ public class UniMap extends FragmentActivity implements RoutingListener {
      */
 
 
-
-
-    private void createBoundary()  {
+    private void createBoundary() {
 
         Polygon polygon = mMap.addPolygon(new PolygonOptions()
                 .add(
-                new LatLng(-0.244145,51.755648),
-                new LatLng(-0.234189,51.752912),
-                new LatLng(-0.234103,51.749883),
-                new LatLng(-0.239038,51.749750),
-                new LatLng(-0.241227,51.748395),
-                new LatLng(-0.242558,51.748050),
-                new LatLng(-0.243931,51.750547),
-                new LatLng(-0.244660,51.752673),
-                new LatLng(-0.244575,51.754426),
-                new LatLng(-0.244145,51.755648))
+                        new LatLng(-0.244145, 51.755648),
+                        new LatLng(-0.234189, 51.752912),
+                        new LatLng(-0.234103, 51.749883),
+                        new LatLng(-0.239038, 51.749750),
+                        new LatLng(-0.241227, 51.748395),
+                        new LatLng(-0.242558, 51.748050),
+                        new LatLng(-0.243931, 51.750547),
+                        new LatLng(-0.244660, 51.752673),
+                        new LatLng(-0.244575, 51.754426),
+                        new LatLng(-0.244145, 51.755648))
                 .strokeColor(Color.BLUE)
                 .fillColor(Color.LTGRAY));
     }
 
-
     private void setUpMap() {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.setMyLocationEnabled(true);
-
-
         CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 19);
         mMap.animateCamera(intialCameraUpdate);
-
-
-        createBoundary();
-
-
-
-        //addOverlay();
-
         mapXML = MapXML.getInstance();
-
-        //getMakersfromXML(buildingMarkers);
-
-        plotMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
-
+        plotBuildingsMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
         set3DMap(true);
         setIndoorMap(true);
-
-
     }
 
-    public void showDirections(LatLng start,LatLng end){
+    public void showDirections(LatLng start, LatLng end) {
         start = new LatLng(51.753167, -0.242132);
         end = new LatLng(51.752429, -0.242103);
 
@@ -153,13 +216,59 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     }
 
-    public void zoomTo (Place place){
-        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getMarker().getPosition(),place.getZoom());
-        mMap.animateCamera(intialCameraUpdate);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Place place = null;
+
+        if (data == null) {
+            return;
+        }
+        String name = data.getStringExtra("place");
+
+        Iterator<Map.Entry<String, Building>> iterator = mapXML.getBuildings().entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Building> placeEntry = iterator.next();
+            Building building = (Building) placeEntry.getValue();
+
+            ArrayList<Room> rooms = building.getRooms();
+            System.out.println("" + building.getName());
+
+            if (name.contentEquals(building.getName())) {
+                place = building;
+                break;
+            } else {
+                if (rooms.size() != 0) {
+                    for (Room room : building.getRooms()) {
+                        if (name.contentEquals(room.getName())) {
+                            if (room != null) {
+                                zoomToRoom(room);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+
     }
 
-    public void showMarkers()
-    {
+    public void zoomTo(Place place) {
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getMarker().getPosition(), place.getZoom());
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    public void zoomToRoom(Room room) {
+        IconGenerator iconFactory = new IconGenerator(this);
+        iconFactory.setColor(Color.rgb(52, 181, 229));
+        mMap.addMarker(room.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(room.getType()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(room.getName()))));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(room.getMarker().getPosition(), room.getZoom());
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    public void showMarkers() {
 
     }
 
@@ -176,42 +285,75 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         //bottom =
 
         LatLng southWest = new LatLng(51.754445, -0.238229);
-        LatLng northEast= new LatLng(51.748717, -0.236957);
+        LatLng northEast = new LatLng(51.748717, -0.236957);
 
-        LatLngBounds latLngBounds = new LatLngBounds(northEast,southWest );
+        LatLngBounds latLngBounds = new LatLngBounds(northEast, southWest);
 
         GroundOverlayOptions newarkMap = new GroundOverlayOptions()
                 .image(BitmapDescriptorFactory.fromResource(R.raw.overlay_map))
-                .positionFromBounds(latLngBounds ).transparency(0.5f);
+                .positionFromBounds(latLngBounds).transparency(0.5f);
 
-         // Add an overlay to the map, retaining a handle to the GroundOverlay object.
+        // Add an overlay to the map, retaining a handle to the GroundOverlay object.
         GroundOverlay imageOverlay = mMap.addGroundOverlay(newarkMap);
 
 
     }
 
+    private BitmapDescriptor getRoomIcon(Room r) {
+        String type = r.getType();
+        BitmapDescriptor icon = null;
+
+        if (type == "toilet") {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.toilets);
+        } else if (type == "medical") {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.medicine);
+        } else if (type == "classroom") {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
+        } else if (type == "classroom") {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
+        } else {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.university);
+        }
+        return icon;
 
 
-    private void plotMarkers(HashMap<String, Building> places)
-    {
+    }
+
+    private void plotBuildingsMarkers(HashMap<String, Building> buildings) {
         IconGenerator iconFactory = new IconGenerator(this);
+        Iterator<Map.Entry<String, Building>> iterator = buildings.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Building> buildingEntry = iterator.next();
+            Building building = buildingEntry.getValue();
 
-        Iterator<Map.Entry<String, Building>> iterator = places.entrySet().iterator() ;
-        while(iterator.hasNext()) {
-            Map.Entry<String, Building> placeEntry = iterator.next();
-            Building building = (Building) placeEntry.getValue();
-
-            ArrayList<Room> rooms = building.getRooms();
             System.out.println("" + building.getName());
 
             mMap.addMarker(building.getMarker().snippet(building.getAddress()).icon(BitmapDescriptorFactory
                     .fromResource(R.raw.university)));
 
-            if (rooms.size() != 0)
-            {
+        }
+
+    }
+
+    private void plotBuildingWithRoomsMarkers(HashMap<String, Building> buildings) {
+        IconGenerator iconFactory = new IconGenerator(this);
+
+        Iterator<Map.Entry<String, Building>> iterator = buildings.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Building> buildingEntry = iterator.next();
+            Building building = buildingEntry.getValue();
+
+
+            System.out.println("" + building.getName());
+
+            mMap.addMarker(building.getMarker().snippet(building.getAddress()).icon(BitmapDescriptorFactory
+                    .fromResource(R.raw.university)));
+
+
+            ArrayList<Room> rooms = building.getRooms();
+            if (rooms.size() != 0) {
                 System.out.println("Adding Rooms");
-                for (Room room : building.getRooms())
-                {
+                for (Room room : building.getRooms()) {
                     System.out.println(room.getName());
 
                     iconFactory.setColor(Color.rgb(52, 181, 229));
@@ -230,7 +372,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -246,55 +387,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Place place = null;
-
-        if (data == null) {return;}
-        String name = data.getStringExtra("place");
-
-        Iterator<Map.Entry<String, Building>> iterator = mapXML.getBuildings().entrySet().iterator() ;
-        while(iterator.hasNext()) {
-            Map.Entry<String, Building> placeEntry = iterator.next();
-            Building building = (Building) placeEntry.getValue();
-
-            ArrayList<Room> rooms = building.getRooms();
-            System.out.println("" + building.getName());
-
-            if (name.contentEquals(building.getName()))
-            {
-                place = building;
-                break;
-            }
-            else
-            {
-                if (rooms.size() != 0)
-                {
-                    for (Room room : building.getRooms())
-                    {
-                        if (name.contentEquals(room.getName()))
-                        {
-                            place = room;
-                            break;
-                        }
-                    }
-                }
-            }
-
-
-
-        }
-
-        if (place != null)
-        {
-            zoomTo(place);
-        }
-    }
-
-    private void BitmapDescriptor(String type) {
-
     }
 
     private void set3DMap(boolean value) {
@@ -316,7 +408,7 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     }
 
     @Override
-    public void onRoutingSuccess(PolylineOptions mPolyOptions,Route route) {
+    public void onRoutingSuccess(PolylineOptions mPolyOptions, Route route) {
         PolylineOptions polyoptions = new PolylineOptions();
         polyoptions.color(Color.BLUE);
         polyoptions.width(10);
@@ -334,5 +426,13 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         options.position(end);
         options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
         mMap.addMarker(options);
+    }
+
+    /* The click listner for ListView in the navigation drawer */
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
     }
 }

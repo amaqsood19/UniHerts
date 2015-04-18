@@ -6,68 +6,68 @@
 
 
     <Button
+        android:id="@+id/student_id_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/student_id_card_icon"
-        android:text="Student ID"
-        android:background="@android:color/transparent"
-        android:textAlignment="center"
-        android:id="@+id/student_id_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="47dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="openID" />
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/student_id_card_icon"
+        android:onClick="openID"
+        android:text="Student ID"
+        android:textAlignment="center" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/maps_icon"
-        android:text="Map"
-        android:background="@android:color/transparent"
-        android:textAlignment="center"
         android:id="@+id/map_id_button"
-        android:layout_alignTop="@+id/student_id_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/student_id_button"
         android:layout_marginEnd="60dp"
-        android:onClick="openMap" />
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/maps_icon"
+        android:onClick="openMap"
+        android:text="Map"
+        android:textAlignment="center" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/food_icon"
-        android:text="Food"
-        android:background="@android:color/transparent"
-        android:textAlignment="center"
         android:id="@+id/button4"
-        android:onClick="openFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/student_id_button"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/student_id_button" />
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/food_icon"
+        android:onClick="openFood"
+        android:text="Food"
+        android:textAlignment="center" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/facebook_news"
-        android:text="News"
-        android:background="@android:color/transparent"
-        android:textAlignment="center"
         android:id="@+id/button5"
-        android:onClick="openNews"
-        android:layout_alignTop="@+id/button4"
-        android:layout_alignStart="@+id/map_id_button" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/facebook_news"
-        android:text="Parkings"
+        android:layout_alignStart="@+id/map_id_button"
+        android:layout_alignTop="@+id/button4"
         android:background="@android:color/transparent"
-        android:textAlignment="center"
+        android:drawableTop="@drawable/facebook_news"
+        android:onClick="openNews"
+        android:text="News"
+        android:textAlignment="center" />
+
+    <Button
         android:id="@+id/button6"
-        android:onClick="openParkingMap"
-        android:layout_below="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/button4"
-        android:layout_marginTop="46dp" />
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="46dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/parking_map_icon"
+        android:onClick="openParkingMap"
+        android:text="Parkings"
+        android:textAlignment="center" />
 
 
 </RelativeLayout>

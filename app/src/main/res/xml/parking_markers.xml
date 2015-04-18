@@ -1,30 +1,55 @@
 <parkings>
     <parking>
-        <name>Parking Lindop</name>
+        <name>Parking Coales Hall</name>
         <lat>51.754579</lat>
         <lang>-0.243821</lang>
-        <address></address>
         <zoom>15</zoom>
-        <code>P1</code>
-        <type>Staff and Public (Pay and Show)</type>
-        <spaceDetails>100</spaceDetails>
+        <address>University Of Hertfordshire \r\n College Lane Hatfield, \r\n Hertfordshire AL10
+            9AB
+        </address>
+        <code>P-F</code>
+        <type>2</type>
+        <isDisable>N</isDisable>
+        <spaceDetails>75</spaceDetails>
         <features>Disable Parking</features>
-        <parkingRestrictions>Staff with Parking Permit</parkingRestrictions>
-        <restrictionsTime>8:30 - 5:00</restrictionsTime>
-
+        <parkingRestrictions>Staff Members holding Permit</parkingRestrictions>
+        <restrictionsTime>Monday - Friday \r\n 08:00 – 17:30 hours</restrictionsTime>
     </parking>
+
     <parking>
-        <name>Parking near Science Building</name>
-        <lat>51.753593</lat>
-        <lang>-0.239685</lang>
-        <address></address>
+        <name>Parking Telford Court</name>
+        <lat>51.753753</lat>
+        <lang>-0.244296</lang>
         <zoom>15</zoom>
-        <code>P2</code>
-        <type>Staff Only</type>
-        <spaceDetails>100</spaceDetails>
+        <address>University Of Hertfordshire \nCollege Lane Hatfield, \nHertfordshire AL10 9AB
+        </address>
+        <code>P-D</code>
+        <type>3</type>
+        <isDisable>N</isDisable>
+        <spaceDetails>25</spaceDetails>
         <features>Disable Parking</features>
-        <parkingRestrictions>Staff with Parking Permit</parkingRestrictions>
-        <restrictionsTime>8:30 - 5:00</restrictionsTime>
-
+        <parkingRestrictions>The rules are in force from 08:00 – 17:30 hours Monday to Friday except
+            BankHolidays and Privilege days when the University is closed.
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday \n 08:00 – 17:30 hours</restrictionsTime>
     </parking>
+
+    <parking>
+        <name>Parking Roberts Way</name>
+        <lat>51.750771</lat>
+        <lang>-0.236911</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire \nCollege Lane Hatfield, \nHertfordshire AL10 9AB
+        </address>
+        <code>P-D</code>
+        <type>1</type>
+        <isDisable>N</isDisable>
+        <spaceDetails>25</spaceDetails>
+        <features>Disable Parking</features>
+        <parkingRestrictions>The rules are in force from 08:00 – 17:30 hours Monday to Friday except
+            BankHolidays and Privilege days when the University is closed.
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday \n 08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
 </parkings>
