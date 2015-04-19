@@ -14,8 +14,21 @@
         tools:context=".UniMap"
         tools:layout="@layout/activity_uni_map" />
 
+    <!--<ToggleButton-->
+    <!--android:id="@+id/iconr"-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:maxWidth="48dp"-->
+    <!--android:maxHeight="48dp"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginRight="17dp"-->
+    <!--android:src="@drawable/ic_launcher" />-->
+
     <ListView
-        android:id="@+id/left_drawer"
+        android:id="@+id/right_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"

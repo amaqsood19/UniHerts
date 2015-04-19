@@ -793,5 +793,21 @@
         <lang>-0.238506</lang>
         <zoom>18</zoom>
     </building>
+    <building>
+        <name>The Forum</name>
+        <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
+        <lat>51.752629</lat>
+        <lang>-0.238506</lang>
+        <zoom>18</zoom>
+        <rooms>
+            <room>
+                <name>B120B</name>
+                <lat>51.753167</lat>
+                <lang>-0.242132</lang>
+                <zoom>22</zoom>
+                <type>classroom</type>
+            </room>
+        </rooms>
+    </building>
     <rooms></rooms>
 </buildings>

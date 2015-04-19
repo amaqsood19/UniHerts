@@ -6,11 +6,13 @@ package asmirza.uniherts;
 public class DrawerItem {
 
     String ItemName;
+    String type;
     int imgResID;
     boolean selected = false;
 
-    public DrawerItem(String itemName, int imgResID, boolean selected) {
+    public DrawerItem(String itemName, String type, int imgResID, boolean selected) {
         ItemName = itemName;
+        this.type = type;
         this.imgResID = imgResID;
         this.selected = selected;
     }
@@ -39,4 +41,11 @@ public class DrawerItem {
         this.imgResID = imgResID;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

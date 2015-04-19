@@ -14,13 +14,24 @@ public class Room extends Place {
         this.type = type;
     }
 
-    public Room(Double lat, Double lang, String name, float zoom,String inBuilding,String type) {
-        super(lat, lang, name, zoom);
+
+    public Room(Double lat, Double lang, String name, float zoom, String info, String inBuilding, String type) {
+        super(lat, lang, name, zoom, info);
         this.inBuilding = inBuilding;
         this.type = type;
     }
 
+    public String getTypeString() {
+        String typeString = "";
 
+        if (type == "toilets") {
+            typeString = "Toilets";
+        } else if (type == "accessibility_toilet") {
+            typeString = "Accessibility Toilets";
+        }
+
+        return typeString;
+    }
 
     public String getType() {
         return type;
@@ -38,12 +49,11 @@ public class Room extends Place {
         this.inBuilding = inBuilding;
     }
 
-
     @Override
     public String toString() {
         return "Room{" +
                 "inBuilding='" + inBuilding + '\'' +
                 ", type='" + type + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

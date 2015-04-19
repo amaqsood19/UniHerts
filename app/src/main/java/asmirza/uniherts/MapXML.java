@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -12,10 +13,32 @@ import java.util.HashMap;
 public class MapXML {
 
     private static MapXML instanceMapXML;
-    HashMap<String, Building> buildings = new HashMap<>();
-    HashMap<String, Parking> parkings = new HashMap<>();
+    private HashMap<String, Building> buildings = new HashMap<>();
+    private HashMap<String, Parking> parkings = new HashMap<>();
+
+    private ArrayList<Building> buildingPlaces;
+    private ArrayList<Room> classRoomPlaces;
+    private ArrayList<Room> toiletPlaces;
+    private ArrayList<Room> accessibleToiletPlaces;
+    private ArrayList<Room> shopsPlaces;
+    private ArrayList<Room> learningZonePlaces;
+    private ArrayList<Room> foodPlaces;
+    private ArrayList<Room> doorsPlaces;
+    private ArrayList<Room> liftPlaces;
+    private ArrayList<Room> showersChangingPlaces;
 
     public MapXML() {
+
+        buildingPlaces = new ArrayList<Building>();
+        classRoomPlaces = new ArrayList<Room>();
+        toiletPlaces = new ArrayList<Room>();
+        accessibleToiletPlaces = new ArrayList<Room>();
+        shopsPlaces = new ArrayList<Room>();
+        learningZonePlaces = new ArrayList<Room>();
+        foodPlaces = new ArrayList<Room>();
+        doorsPlaces = new ArrayList<Room>();
+        liftPlaces = new ArrayList<Room>();
+        showersChangingPlaces = new ArrayList<Room>();
     }
 
     public static MapXML getInstance() {
@@ -40,6 +63,7 @@ public class MapXML {
 
 
         String roomType = "";
+        String roomInfo = "";
 
         building = new Building(lat, lang, name, address, zoom);
 
@@ -81,12 +105,15 @@ public class MapXML {
                                             zoom = Float.valueOf(text);
                                         } else if (tageName2.equals("type")) {
                                             roomType = text;
+                                        } else if (tageName2.equals("info")) {
+                                            roomInfo = text;
                                         } else if (tageName2.equals("room")) {
                                             System.out.println("" + tageName);
                                             System.out.println("ROOM END ");
-                                            room = new Room(lat, lang, name, zoom, building.getName(), roomType);
+                                            room = new Room(lat, lang, name, zoom, roomInfo, building.getName(), roomType);
                                             System.out.println("ROOM READY " + room.getName());
                                             building.addRoom(room);
+                                            saveRoomsByType(room);
                                             System.out.println("ROOM added ");
                                         } else {
                                         }
@@ -105,6 +132,7 @@ public class MapXML {
                             System.out.println("" + tageName);
                             System.out.println("BUILDING ADDED");
                             buildings.put(building.getName(), building);
+                            buildingPlaces.add(building);
                         }
                         if (tageName.equals("name")) {
                             name = text;
@@ -131,6 +159,16 @@ public class MapXML {
             e.printStackTrace();
         }
 
+    }
+
+
+    private void saveRoomsByType(Room room) {
+        String roomsMarkersType = room.getType();
+        if (roomsMarkersType.equalsIgnoreCase("shop")) {
+            shopsPlaces.add(room);
+        } else if (roomsMarkersType.equalsIgnoreCase("toilet")) {
+            toiletPlaces.add(room);
+        }
     }
 
     public void readXMLParkingMarkers(XmlPullParser xpp) {
@@ -238,7 +276,44 @@ public class MapXML {
         return parkings;
     }
 
-    public void getAllRooms(HashMap<String, Place> buildings) {
 
+    public ArrayList<Building> getBuildingPlaces() {
+        return buildingPlaces;
+    }
+
+    public ArrayList<Room> getClassRoomPlaces() {
+        return classRoomPlaces;
+    }
+
+    public ArrayList<Room> getToiletPlaces() {
+        return toiletPlaces;
+    }
+
+    public ArrayList<Room> getAccessibleToiletPlaces() {
+        return accessibleToiletPlaces;
+    }
+
+    public ArrayList<Room> getShopsPlaces() {
+        return shopsPlaces;
+    }
+
+    public ArrayList<Room> getLearningZonePlaces() {
+        return learningZonePlaces;
+    }
+
+    public ArrayList<Room> getFoodPlaces() {
+        return foodPlaces;
+    }
+
+    public ArrayList<Room> getDoorsPlaces() {
+        return doorsPlaces;
+    }
+
+    public ArrayList<Room> getLiftPlaces() {
+        return liftPlaces;
+    }
+
+    public ArrayList<Room> getShowersChangingPlaces() {
+        return showersChangingPlaces;
     }
 }

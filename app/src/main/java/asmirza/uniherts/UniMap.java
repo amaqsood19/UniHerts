@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -53,11 +55,33 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     Toolbar mToolbar;
     List<DrawerItem> dataList;
     CustomDrawerAdapter adapter;
+    ImageView iconr;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private HashMap<String, Building> buildings;
+    private ArrayList<Building> buildingPlaces;
+    private ArrayList<Room> classRoomPlaces;
+    private ArrayList<Room> toiletPlaces;
+    private ArrayList<Room> accessibleToiletPlaces;
+    private ArrayList<Room> shopsPlaces;
+    private ArrayList<Room> learningZonePlaces;
+    private ArrayList<Room> foodPlaces;
+    private ArrayList<Room> doorsPlaces;
+    private ArrayList<Room> liftPlaces;
+    private ArrayList<Room> showersChangingPlaces;
+    private HashMap<String, Building> buildingMarkers;
+    private HashMap<String, Room> classRoomMarkers;
+    private HashMap<String, Room> toiletMarkers;
+    private HashMap<String, Room> accessibleToiletMarkers;
+    private HashMap<String, Room> shopsMarkers;
+    private HashMap<String, Room> learningZoneMarkers;
+    private HashMap<String, Room> foodMarkers;
+    private HashMap<String, Room> doorsMarkers;
+    private HashMap<String, Room> liftMarkers;
+    private HashMap<String, Room> showersChangingMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +89,13 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         setContentView(R.layout.activity_uni_map);
         setUpMapIfNeeded();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.map_drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (ListView) findViewById(R.id.right_drawer);
         mTitle = getTitle().toString();
         mDrawerTitle = "Select Layers to show";
         // Set the adapter for the list view
         dataList = new ArrayList<DrawerItem>();
-        dataList.add(new DrawerItem("Buildings", R.raw.university, false));
-        dataList.add(new DrawerItem("Food Outlets", R.raw.university, false));
+        dataList.add(new DrawerItem("Toilets", "toilet", R.raw.toilets, false));
+        dataList.add(new DrawerItem("Food Outlets", "food", R.raw.university, false));
         adapter = new CustomDrawerAdapter(this, R.layout.drawer_list_item,
                 dataList);
 
@@ -106,6 +130,21 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+//        iconr = (ImageView)findViewById(R.id.iconr);
+//
+//        iconr.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+//                    mDrawerLayout.closeDrawer(Gravity.RIGHT);
+//                } else {
+//                    mDrawerLayout.openDrawer(Gravity.RIGHT);
+//                }
+//            }
+//        });
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -219,7 +258,24 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 19);
         mMap.animateCamera(intialCameraUpdate);
         mapXML = MapXML.getInstance();
+
+
         plotBuildingsMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
+
+        buildings = mapXML.getBuildings(getResources().getXml(R.xml.building_markers));
+
+        buildingPlaces = mapXML.getBuildingPlaces();
+        classRoomPlaces = mapXML.getClassRoomPlaces();
+        toiletPlaces = mapXML.getToiletPlaces();
+        accessibleToiletPlaces = mapXML.getAccessibleToiletPlaces();
+        shopsPlaces = mapXML.getShopsPlaces();
+        learningZonePlaces = mapXML.getLearningZonePlaces();
+        foodPlaces = mapXML.getFoodPlaces();
+        doorsPlaces = mapXML.getDoorsPlaces();
+        liftPlaces = mapXML.getLiftPlaces();
+        showersChangingPlaces = mapXML.getShowersChangingPlaces();
+
+
         set3DMap(true);
         setIndoorMap(true);
     }
@@ -317,23 +373,45 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     }
 
+    private void plotSelectedTypeMarkers(List<DrawerItem> layersList) {
+
+        mMap.clear();
+        for (int i = 0; i < layersList.size(); i++) {
+            DrawerItem layer = layersList.get(i);
+            if (layer.isSelected()) {
+                layer.setSelected(true);
+                plotLayerMarkers(layer.getType());
+            }
+        }
+
+    }
+
+    private void plotLayerMarkers(String layerType) {
+
+        if (layerType == "toilet") {
+            plotMarkers(toiletPlaces);
+        } else if (layerType == "food") {
+            plotMarkers(foodPlaces);
+        }
+
+    }
+
     private BitmapDescriptor getRoomIcon(Room r) {
         String type = r.getType();
         BitmapDescriptor icon = null;
 
-        if (type == "toilet") {
+        if (type.equalsIgnoreCase("toilet")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.toilets);
-        } else if (type == "medical") {
+        } else if (type.equalsIgnoreCase("medical")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.medicine);
-        } else if (type == "classroom") {
+        } else if (type.equalsIgnoreCase("classroom")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
-        } else if (type == "classroom") {
+        } else if (type.equalsIgnoreCase("classroom")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
         } else {
             icon = BitmapDescriptorFactory.fromResource(R.raw.university);
         }
         return icon;
-
 
     }
 
@@ -352,6 +430,44 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         }
 
     }
+
+    private void plotMarkers(ArrayList<Room> rooms) {
+        IconGenerator iconFactory = new IconGenerator(this);
+        System.out.println(rooms.toString());
+
+        HashMap<String, Room> roomsMarkers = new HashMap<String, Room>();
+
+        BitmapDescriptor roomIcon = getRoomIcon(rooms.get(0));
+
+        for (Room room : rooms) {
+            System.out.println(room);
+
+            System.out.println("" + room.getName());
+
+            Marker roomMarker = mMap.addMarker(room.getMarker().snippet(room.getTypeString()).icon(roomIcon));
+
+            roomsMarkers.put(roomMarker.getId(), room);
+
+        }
+
+        savePlottedMarkersByType(roomsMarkers);
+
+    }
+
+
+    private void savePlottedMarkersByType(HashMap<String, Room> roomsMarkers) {
+        String roomsMarkersType = roomsMarkers.entrySet().iterator().next().getValue().getType();
+        if (roomsMarkersType.equalsIgnoreCase("shop")) {
+            shopsMarkers = roomsMarkers;
+        } else if (roomsMarkersType.equalsIgnoreCase("toilet")) {
+            toiletMarkers = roomsMarkers;
+        } else {
+
+        }
+    }
+
+
+
 
     private void plotBuildingWithRoomsMarkers(HashMap<String, Building> buildings) {
         IconGenerator iconFactory = new IconGenerator(this);
@@ -382,6 +498,7 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -489,6 +606,7 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             Toast.makeText(getApplicationContext(),
                     responseText, Toast.LENGTH_LONG).show();
 
+            plotSelectedTypeMarkers(layersList);
 
 
         }
