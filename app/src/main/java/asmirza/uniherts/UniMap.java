@@ -13,8 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.directions.route.Route;
 import com.directions.route.Routing;
@@ -38,6 +39,7 @@ import com.google.maps.android.ui.IconGenerator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class UniMap extends FragmentActivity implements RoutingListener {
@@ -49,38 +51,60 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     protected LatLng end;
     protected MapXML mapXML;
     Toolbar mToolbar;
+    List<DrawerItem> dataList;
+    CustomDrawerAdapter adapter;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mLayersTitlesList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uni_map);
         setUpMapIfNeeded();
-        mLayersTitlesList = getResources().getStringArray(R.array.map_layers_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.map_drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
+        mTitle = getTitle().toString();
+        mDrawerTitle = "Select Layers to show";
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mLayersTitlesList));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        dataList = new ArrayList<DrawerItem>();
+        dataList.add(new DrawerItem("Buildings", R.raw.university, false));
+        dataList.add(new DrawerItem("Food Outlets", R.raw.university, false));
+        adapter = new CustomDrawerAdapter(this, R.layout.drawer_list_item,
+                dataList);
 
+        mDrawerList.setAdapter(adapter);
+
+        // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, mToolbar,
-                R.string.drawer_open, R.string.drawer_close
-        );
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout
+                , mToolbar, R.string.drawer_open, R.string.drawer_close) {
+
+            /**
+             * Called when a drawer has settled in a completely open state.
+             */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /**
+             * Called when a drawer has settled in a completely closed state.
+             */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,12 +131,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 //        mDrawerList.setItemChecked(position, true);
 //        setTitle(mPlanetTitles[position]);
 //        mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        getActionBar().setTitle(mTitle);
     }
 
     /**
@@ -375,6 +393,12 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         switch (item.getItemId()) {
             case R.id.buildings_menu_button:
                 Intent intent = new Intent(this, ListBuildings.class);
@@ -387,6 +411,10 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             default:
                 return super.onOptionsItemSelected(item);
         }
+        // Handle your other action bar items...
+
+
+
     }
 
     private void set3DMap(boolean value) {
@@ -432,7 +460,37 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+
+
+            StringBuffer responseText = new StringBuffer();
+            responseText.append("The following were selected...\n");
+            // When clicked, show a toast with the TextView text
+            DrawerItem drawerItem = (DrawerItem) parent.getItemAtPosition(position);
+            if (!drawerItem.isSelected()) {
+                CheckBox box = (CheckBox) view.findViewById(R.id.drawer_checkBox);
+                box.setChecked(true);
+                drawerItem.setSelected(true);
+            } else {
+                CheckBox box = (CheckBox) view.findViewById(R.id.drawer_checkBox);
+                box.setChecked(false);
+                drawerItem.setSelected(false);
+            }
+
+
+            List<DrawerItem> layersList = adapter.drawerItemList;
+            for (int i = 0; i < layersList.size(); i++) {
+                DrawerItem layer = layersList.get(i);
+                if (layer.isSelected()) {
+                    layer.setSelected(true);
+                    responseText.append("\n" + layer.getItemName());
+                }
+            }
+
+            Toast.makeText(getApplicationContext(),
+                    responseText, Toast.LENGTH_LONG).show();
+
+
+
         }
     }
 }
