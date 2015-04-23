@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 /**
  * Created by ASMIRZA on 13/02/2015.
@@ -9,7 +9,7 @@ public class Room extends Place {
     private String inBuilding;
     private String type;
 
-    public Room(Double lat, Double lang, String name, float zoom,String type) {
+    public Room(Double lat, Double lang, String name, float zoom, String type) {
         super(lat, lang, name, zoom);
         this.type = type;
     }

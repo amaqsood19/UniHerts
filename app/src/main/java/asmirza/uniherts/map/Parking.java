@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 /**
  * Created by ASMIRZA on 13/02/2015.

@@ -1,17 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="55dip"
-    android:background="#ff34b5e5"
-    android:orientation="vertical" >
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip">
 
+
+    <ImageView
+        android:id="@+id/building_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:src="@raw/university" />
 
     <TextView
-        android:id="@+id/rooms_group"
+        android:id="@+id/building_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:textColor="@color/button_material_dark"
-        android:textSize="17dip" />
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toEndOf="@+id/building_icon"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:text="Location"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/building_description"
+        android:layout_width="fill_parent"
+        android:layout_height="22dip"
+        android:layout_below="@+id/building_name"
+        android:layout_toEndOf="@+id/building_icon"
+        android:clickable="false"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="12sp" />
+
+</RelativeLayout>

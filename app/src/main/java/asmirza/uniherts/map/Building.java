@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Building extends Place {
     private String address;
 
 
-    public Building(Double lat, Double lang, String name,String address, float zoom, ArrayList<Room> rooms) {
+    public Building(Double lat, Double lang, String name, String address, float zoom, ArrayList<Room> rooms) {
         super(lat, lang, name, zoom);
         this.address = address;
         this.rooms = rooms;
@@ -31,8 +31,7 @@ public class Building extends Place {
         this.rooms = rooms;
     }
 
-    public void addRoom(Room room)
-    {
+    public void addRoom(Room room) {
         rooms.add(room);
     }
 

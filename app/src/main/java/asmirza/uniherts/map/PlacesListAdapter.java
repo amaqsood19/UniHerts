@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import asmirza.uniherts.R;
 
 public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable {
     private List<Place> placeList;
@@ -25,15 +27,19 @@ public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable
         this.context = ctx;
         this.origPlaceList = planetList;
     }
+
     public int getCount() {
         return placeList.size();
     }
+
     public Place getItem(int position) {
         return placeList.get(position);
     }
+
     public long getItemId(int position) {
         return placeList.get(position).hashCode();
     }
+
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         PlaceHolder holder = new PlaceHolder();
@@ -62,14 +68,7 @@ public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable
     public void resetData() {
         placeList = origPlaceList;
     }
-    /* *********************************
-    * We use the holder pattern
-    * It makes the view faster and avoid finding the component
-    * **********************************/
-    private static class PlaceHolder {
-        public TextView placeNameView;
-        public TextView distView;
-    }
+
     /*
     * We create our filter
     */
@@ -79,6 +78,16 @@ public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable
             placeFilter = new PlaceFilter();
         return placeFilter;
     }
+
+    /* *********************************
+    * We use the holder pattern
+    * It makes the view faster and avoid finding the component
+    * **********************************/
+    private static class PlaceHolder {
+        public TextView placeNameView;
+        public TextView distView;
+    }
+
     private class PlaceFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -88,8 +97,7 @@ public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable
                 // No filter implemented we return all the list
                 results.values = origPlaceList;
                 results.count = origPlaceList.size();
-            }
-            else {
+            } else {
                 // We perform filtering operation
                 List<Place> nPlaceList = new ArrayList<Place>();
                 for (Place p : placeList) {

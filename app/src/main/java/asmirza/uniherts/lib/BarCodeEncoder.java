@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.lib;
 
 import android.graphics.Bitmap;
 
@@ -11,9 +11,7 @@ import com.google.zxing.common.BitMatrix;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * Created by ASMIRZA on 11/02/2015.
- */
+
 public class BarCodeEncoder {
 
     private static final int WHITE = 0xFFFFFFFF;
@@ -62,7 +60,7 @@ public class BarCodeEncoder {
             }
         }
         return null;
- }
+    }
 
 
 }

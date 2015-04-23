@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import android.util.Log;
 
@@ -164,10 +164,16 @@ public class MapXML {
 
     private void saveRoomsByType(Room room) {
         String roomsMarkersType = room.getType();
-        if (roomsMarkersType.equalsIgnoreCase("shop")) {
-            shopsPlaces.add(room);
+        if (roomsMarkersType.equalsIgnoreCase("classroom")) {
+            classRoomPlaces.add(room);
         } else if (roomsMarkersType.equalsIgnoreCase("toilet")) {
             toiletPlaces.add(room);
+        } else if (roomsMarkersType.equalsIgnoreCase("accessiblity_toilet")) {
+            accessibleToiletPlaces.add(room);
+        } else if (roomsMarkersType.equalsIgnoreCase("food_outlet")) {
+            foodPlaces.add(room);
+        } else if (roomsMarkersType.equalsIgnoreCase("shop")) {
+            shopsPlaces.add(room);
         }
     }
 
@@ -255,6 +261,10 @@ public class MapXML {
 
 
     public HashMap<String, Building> getBuildings(XmlPullParser xpp) {
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException ignore) {
+        }
         if (buildings.size() == 0) {
             readXMLBuildingMarkers(xpp);
         }
@@ -276,6 +286,10 @@ public class MapXML {
         return parkings;
     }
 
+
+    public HashMap<String, Parking> getParkings() {
+        return parkings;
+    }
 
     public ArrayList<Building> getBuildingPlaces() {
         return buildingPlaces;

@@ -3,37 +3,37 @@ package asmirza.uniherts;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.widget.ProgressBar;
 
 
-public class SplashScreen extends Activity {
+public class SplashScreen extends Activity implements LoadingTask.LoadingTaskFinishedListener {
 
-    // Splash screen timer
-    private static int SPLASH_TIME_OUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        new Handler().postDelayed(new Runnable() {
+        // Find the progress bar
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.activity_splash_progress_bar);
+        // Start your loading
+        new LoadingTask(this, progressBar, this).execute(""); // Pass in whatever you need a url is just an example we don't use it in this tutorial
+    }
 
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
+    // This is the callback for when your async task has finished
+    @Override
+    public void onTaskFinished() {
+        completeSplash();
+    }
 
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashScreen.this, MainMenu.class);
-                startActivity(i);
+    private void completeSplash() {
+        startApp();
+        finish(); // Don't forget to finish this Splash Activity so the user can't return to it!
+    }
 
-                // close this activity
-                finish();
-            }
-        }, SPLASH_TIME_OUT);
+    private void startApp() {
+        Intent intent = new Intent(SplashScreen.this, MainMenu.class);
+        startActivity(intent);
     }
 
 }

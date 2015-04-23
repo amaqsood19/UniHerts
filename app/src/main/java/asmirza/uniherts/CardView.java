@@ -15,6 +15,8 @@ import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
 
+import asmirza.uniherts.lib.BarCodeEncoder;
+
 
 public class CardView extends Activity {
 
@@ -77,8 +79,6 @@ public class CardView extends Activity {
     }
 
 
-
-
     public void openFullBarcode(View view) {
         Intent intent = new Intent(this, Barcode.class);
 
@@ -93,13 +93,12 @@ public class CardView extends Activity {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         full_barcode_bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] bytes = stream.toByteArray();
-        intent.putExtra(FULL_BARCODE_BITMAP,bytes );
+        intent.putExtra(FULL_BARCODE_BITMAP, bytes);
 
         startActivity(intent);
     }
 
-    private String capitalize(String line)
-    {
+    private String capitalize(String line) {
         return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
 }

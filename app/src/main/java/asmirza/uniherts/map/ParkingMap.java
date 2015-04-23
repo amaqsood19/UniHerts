@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+
+import asmirza.uniherts.R;
 
 public class ParkingMap extends FragmentActivity {
 
@@ -120,14 +122,14 @@ public class ParkingMap extends FragmentActivity {
         mMap.setMyLocationEnabled(true);
 
 
-        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 18);
+        CameraUpdate intialCameraUpdate = CameraUpdateFactory.newLatLngZoom(collegeLane, 15);
         mMap.animateCamera(intialCameraUpdate);
 
 
         mapXML = MapXML.getInstance();
 
 
-        plotMarkers(mapXML.getParkings(getResources().getXml(R.xml.parking_markers)));
+        plotMarkers(mapXML.getParkings());
 
         // Setting a custom info window adapter for the google map
         mMap.setInfoWindowAdapter(new ParkingInfoWindowAdapter());

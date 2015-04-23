@@ -796,16 +796,25 @@
     <building>
         <name>The Forum</name>
         <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
-        <lat>51.752629</lat>
-        <lang>-0.238506</lang>
+        <lat>51.749923</lat>
+        <lang>-0.241782</lang>
         <zoom>18</zoom>
         <rooms>
             <room>
-                <name>B120B</name>
-                <lat>51.753167</lat>
-                <lang>-0.242132</lang>
+                <name>Forum Resturant</name>
+                <lat>51.749948</lat>
+                <lang>-0.241589</lang>
                 <zoom>22</zoom>
-                <type>classroom</type>
+                <type>food_outlet</type>
+                <info>food_outlet</info>
+            </room>
+            <room>
+                <name>UH Student Union's Shop</name>
+                <lat>51.750041</lat>
+                <lang>-0.241908</lang>
+                <zoom>22</zoom>
+                <type>shop</type>
+                <info>shop</info>
             </room>
         </rooms>
     </building>

@@ -2,35 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="asmirza.uniherts.SplashScreen"
-    android:background="#ff36b8fe">
+    android:background="#ff36b8fe"
+    tools:context="asmirza.uniherts.SplashScreen">
+
+    <ProgressBar
+        android:id="@+id/activity_splash_progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
 
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uh_logo"
-        android:layout_above="@+id/textView"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:id="@+id/imgWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/welcome"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/imgLogo" />
+        android:layout_below="@+id/activity_splash_progress_bar"
+        android:src="@drawable/uh_logo" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textSize="12dp"
-        android:textColor="#454545"
-        android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
         android:text="Univeristy of Hertfordshire"
-        android:id="@+id/textView" />
+        android:textColor="#454545"
+        android:textSize="12dp" />
 
 </RelativeLayout>

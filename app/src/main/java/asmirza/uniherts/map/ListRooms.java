@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -16,6 +16,8 @@ import android.widget.SearchView;
 
 import java.util.ArrayList;
 
+import asmirza.uniherts.R;
+
 
 public class ListRooms extends Activity {
 
@@ -30,16 +32,35 @@ public class ListRooms extends Activity {
         setContentView(R.layout.activity_list_rooms);
 
 
-        lv =  (ExpandableListView)  findViewById(R.id.rooms_list_view);
+        lv = (ExpandableListView) findViewById(R.id.rooms_list_view);
 
         MapXML mapXML = MapXML.getInstance();
 
         roomsList = new ArrayList<Building>(mapXML.getBuildings().values());
 
-        adapter = new RoomsListAdapter(roomsList,this);
+        adapter = new RoomsListAdapter(roomsList, this);
         lv.setAdapter(adapter);
 
         expandAll();
+
+        lv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                if (v.findViewById(R.id.building_name).isPressed()) {
+                    //get the group header
+
+                    Building building = roomsList.get(groupPosition);
+                    //get the child info
+
+                    Intent intent = new Intent();
+                    intent.putExtra("place", building.getName());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                return false;
+            }
+        });
 
         lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
@@ -66,18 +87,20 @@ public class ListRooms extends Activity {
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                System.out.println("Text ["+s+"] - Start ["+start+"] - Before ["+before+"] - Count ["+count+"]");
+                System.out.println("Text [" + s + "] - Start [" + start + "] - Before [" + before + "] - Count [" + count + "]");
                 if (count < before) {
-                // We're deleting char so we need to reset the adapter data
+                    // We're deleting char so we need to reset the adapter data
                     adapter.resetData();
                 }
                 adapter.getFilter().filter(s.toString());
                 expandAll();
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -87,7 +110,7 @@ public class ListRooms extends Activity {
     //method to expand all groups
     private void expandAll() {
         int count = adapter.getGroupCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             lv.expandGroup(i);
         }
     }
@@ -95,7 +118,7 @@ public class ListRooms extends Activity {
     //method to collapse all groups
     private void collapseAll() {
         int count = adapter.getGroupCount();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             lv.collapseGroup(i);
         }
     }

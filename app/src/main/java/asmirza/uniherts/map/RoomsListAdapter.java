@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 
 import android.content.Context;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filterable {
+import asmirza.uniherts.R;
+
+public class RoomsListAdapter extends BaseExpandableListAdapter implements Filterable {
 
     private ArrayList<Building> buildingList;
     private Context context;
@@ -87,13 +89,15 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
 
     public View getGroupView(int groupPosition, boolean isLastChild, View view,
                              ViewGroup parent) {
-        Building group = (Building) getGroup(groupPosition);
+        Building building = (Building) getGroup(groupPosition);
         if (view == null) {
             LayoutInflater inf = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             view = inf.inflate(R.layout.rooms_group_list_item, null);
         }
-        TextView tv = (TextView) view.findViewById(R.id.rooms_group);
-        tv.setText(group.getName());
+        TextView tvName = (TextView) view.findViewById(R.id.building_name);
+        TextView tvDescp = (TextView) view.findViewById(R.id.building_description);
+        tvName.setText(building.getName());
+        tvDescp.setText(building.getAddress());
         // TODO Auto-generated method stub
         return view;
     }
@@ -101,16 +105,6 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
     public void resetData() {
         buildingList = origBuildingList;
     }
-
-    /* *********************************
-    * We use the holder pattern
-    * It makes the view faster and avoid finding the component
-    * **********************************/
-    private static class PlaceHolder {
-        public TextView placeNameView;
-        public TextView distView;
-    }
-
 
     public boolean hasStableIds() {
         // TODO Auto-generated method stub
@@ -122,8 +116,6 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
         return true;
     }
 
-
-
     /*
 * We create our filter
 */
@@ -133,6 +125,16 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
             roomsFilter = new RoomFilter();
         return roomsFilter;
     }
+
+    /* *********************************
+    * We use the holder pattern
+    * It makes the view faster and avoid finding the component
+    * **********************************/
+    private static class PlaceHolder {
+        public TextView placeNameView;
+        public TextView distView;
+    }
+
     private class RoomFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -142,8 +144,7 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
                 // No filter implemented we return all the list
                 results.values = origBuildingList;
                 results.count = origBuildingList.size();
-            }
-            else {
+            } else {
                 // We perform filtering operation
                 ArrayList<Building> nBuildingList = new ArrayList<Building>();
                 for (Building building : origBuildingList) {
@@ -156,7 +157,7 @@ public class RoomsListAdapter extends BaseExpandableListAdapter  implements Filt
                         }
                     }
                     if (newRoomList.size() > 0) {
-                        Building nBuilding = new Building(building.getLat(), building.getLat(),building.getName(), building.getAddress(), building.getZoom(),newRoomList);
+                        Building nBuilding = new Building(building.getLat(), building.getLat(), building.getName(), building.getAddress(), building.getZoom(), newRoomList);
                         nBuildingList.add(nBuilding);
                     }
 

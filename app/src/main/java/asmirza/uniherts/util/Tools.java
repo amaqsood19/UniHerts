@@ -1,25 +1,30 @@
 package asmirza.uniherts.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.IOException;
+import java.net.URL;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * Created by ASMIRZA on 16/04/2015.
  */
 public class Tools {
 
 
-    public static String getFriendlyStringDate(String createdTime)
-    {
+    public static String getFriendlyStringDate(String createdTime) {
         SimpleDateFormat formatter = getDateFormat();
         ParsePosition pos = new ParsePosition(0);
         long then = formatter.parse(createdTime, pos).getTime();
         long now = new Date().getTime();
 
-        long seconds = (now - then)/1000;
-        long minutes = seconds/60;
-        long hours = minutes/60;
-        long days = hours/24;
+        long seconds = (now - then) / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
 
         String friendly = null;
         long num = 0;
@@ -45,6 +50,23 @@ public class Tools {
 
     private static SimpleDateFormat getDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
+    }
+
+    public static Bitmap getScaledBitmap(URL picUrl) throws IOException {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
+
+        Bitmap bitmap = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream());
+        int height = bitmap.getHeight(), width = bitmap.getWidth();
+
+        if (height > 1280 && width > 960) {
+            Bitmap rsBitmap = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream(), null, options);
+
+            return rsBitmap;
+
+        } else {
+            return bitmap;
+        }
     }
 
 

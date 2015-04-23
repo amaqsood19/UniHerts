@@ -1,4 +1,4 @@
-package asmirza.uniherts;
+package asmirza.uniherts.map;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,6 +44,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import asmirza.uniherts.R;
 
 public class UniMap extends FragmentActivity implements RoutingListener {
 
@@ -83,6 +86,8 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     private HashMap<String, Room> liftMarkers;
     private HashMap<String, Room> showersChangingMarkers;
 
+    private Marker marker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +99,11 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         mDrawerTitle = "Select Layers to show";
         // Set the adapter for the list view
         dataList = new ArrayList<DrawerItem>();
+        dataList.add(new DrawerItem("Buildings", "building", R.raw.university, false));
+        dataList.add(new DrawerItem("Classrooms", "classroom", R.raw.classroom, false));
         dataList.add(new DrawerItem("Toilets", "toilet", R.raw.toilets, false));
-        dataList.add(new DrawerItem("Food Outlets", "food", R.raw.university, false));
+        dataList.add(new DrawerItem("Food Outlets", "food_outlet", R.raw.university, false));
+        dataList.add(new DrawerItem("Shops", "shop", R.raw.university, false));
         adapter = new CustomDrawerAdapter(this, R.layout.drawer_list_item,
                 dataList);
 
@@ -127,27 +135,39 @@ public class UniMap extends FragmentActivity implements RoutingListener {
                 getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
+
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                if (item != null && item.getItemId() == android.R.id.home) {
+                    if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                        mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                    } else {
+                        mDrawerLayout.openDrawer(Gravity.RIGHT);
+                    }
+                }
+                return false;
+            }
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-//        iconr = (ImageView)findViewById(R.id.iconr);
-//
-//        iconr.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
-//                    mDrawerLayout.closeDrawer(Gravity.RIGHT);
-//                } else {
-//                    mDrawerLayout.openDrawer(Gravity.RIGHT);
-//                }
-//            }
-//        });
+        iconr = (ImageView) findViewById(R.id.iconr);
+
+        iconr.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                    mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                } else {
+                    mDrawerLayout.openDrawer(Gravity.RIGHT);
+                }
+            }
+        });
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
 
         if (savedInstanceState == null) {
             selectItem(0);
@@ -260,9 +280,9 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         mapXML = MapXML.getInstance();
 
 
-        plotBuildingsMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
+        //plotBuildingsMarkers(mapXML.getBuildings(getResources().getXml(R.xml.building_markers)));
 
-        buildings = mapXML.getBuildings(getResources().getXml(R.xml.building_markers));
+        buildings = mapXML.getBuildings();
 
         buildingPlaces = mapXML.getBuildingPlaces();
         classRoomPlaces = mapXML.getClassRoomPlaces();
@@ -275,9 +295,11 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         liftPlaces = mapXML.getLiftPlaces();
         showersChangingPlaces = mapXML.getShowersChangingPlaces();
 
+        // Setting a custom info window adapter for the google map
+        //mMap.setInfoWindowAdapter(new ParkingInfoWindowAdapter());
 
         set3DMap(true);
-        setIndoorMap(true);
+        setIndoorMap(false);
     }
 
     public void showDirections(LatLng start, LatLng end) {
@@ -292,23 +314,22 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Place place = null;
 
         if (data == null) {
             return;
         }
         String name = data.getStringExtra("place");
 
-        Iterator<Map.Entry<String, Building>> iterator = mapXML.getBuildings().entrySet().iterator();
+        Iterator<Map.Entry<String, Building>> iterator = buildings.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<String, Building> placeEntry = iterator.next();
-            Building building = (Building) placeEntry.getValue();
+            Map.Entry<String, Building> buildingEntry = iterator.next();
+            Building building = buildingEntry.getValue();
 
             ArrayList<Room> rooms = building.getRooms();
             System.out.println("" + building.getName());
 
             if (name.contentEquals(building.getName())) {
-                place = building;
+                zoomToBuilding(building);
                 break;
             } else {
                 if (rooms.size() != 0) {
@@ -331,6 +352,14 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     public void zoomTo(Place place) {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getMarker().getPosition(), place.getZoom());
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    public void zoomToBuilding(Building building) {
+        IconGenerator iconFactory = new IconGenerator(this);
+        iconFactory.setColor(Color.rgb(52, 181, 229));
+        mMap.addMarker(building.getMarker().anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV()).snippet(building.getAddress()).icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(building.getName()))));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(building.getMarker().getPosition(), building.getZoom());
         mMap.animateCamera(cameraUpdate);
     }
 
@@ -388,10 +417,18 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     private void plotLayerMarkers(String layerType) {
 
-        if (layerType == "toilet") {
+        if (layerType.equalsIgnoreCase("building")) {
+            plotBuildingsMarkers();
+        } else if (layerType.equalsIgnoreCase("classroom")) {
+            plotMarkers(classRoomPlaces);
+        } else if (layerType.equalsIgnoreCase("toilet")) {
             plotMarkers(toiletPlaces);
-        } else if (layerType == "food") {
+        } else if (layerType.equalsIgnoreCase("accessiblity_toilet")) {
+            plotMarkers(accessibleToiletPlaces);
+        } else if (layerType.equalsIgnoreCase("food_outlet")) {
             plotMarkers(foodPlaces);
+        } else if (layerType.equalsIgnoreCase("shop")) {
+            plotMarkers(shopsPlaces);
         }
 
     }
@@ -400,14 +437,14 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         String type = r.getType();
         BitmapDescriptor icon = null;
 
-        if (type.equalsIgnoreCase("toilet")) {
+        if (type.equalsIgnoreCase("classroom")) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
+        } else if (type.equalsIgnoreCase("toilet")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.toilets);
         } else if (type.equalsIgnoreCase("medical")) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.medicine);
-        } else if (type.equalsIgnoreCase("classroom")) {
-            icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
-        } else if (type.equalsIgnoreCase("classroom")) {
-            icon = BitmapDescriptorFactory.fromResource(R.raw.classroom);
+        } else if (type.equalsIgnoreCase("clinic")) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.hospital);
         } else {
             icon = BitmapDescriptorFactory.fromResource(R.raw.university);
         }
@@ -454,6 +491,29 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
     }
 
+    private void plotBuildingsMarkers() {
+        IconGenerator iconFactory = new IconGenerator(this);
+        System.out.println(buildingPlaces.toString());
+
+        BitmapDescriptor buildingIcon = BitmapDescriptorFactory.fromResource(R.raw.university);
+
+
+        buildingMarkers = new HashMap<String, Building>();
+
+        for (Building building : buildingPlaces) {
+            System.out.println(building);
+
+            System.out.println("" + building.getName());
+
+            Marker buildingMarker = mMap.addMarker(building.getMarker().snippet(building.getAddress()).icon(buildingIcon));
+
+            buildingMarkers.put(buildingMarker.getId(), building);
+
+        }
+
+
+    }
+
 
     private void savePlottedMarkersByType(HashMap<String, Room> roomsMarkers) {
         String roomsMarkersType = roomsMarkers.entrySet().iterator().next().getValue().getType();
@@ -465,8 +525,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
         }
     }
-
-
 
 
     private void plotBuildingWithRoomsMarkers(HashMap<String, Building> buildings) {
@@ -529,7 +587,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
                 return super.onOptionsItemSelected(item);
         }
         // Handle your other action bar items...
-
 
 
     }
@@ -611,4 +668,47 @@ public class UniMap extends FragmentActivity implements RoutingListener {
 
         }
     }
+
+//    private class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+//
+//        private View view;
+//
+//        public MarkerInfoWindowAdapter() {
+//            view = getLayoutInflater().inflate(R.layout.parking_marker_info,
+//                    null);
+//        }
+//
+//        @Override
+//        public View getInfoContents(Marker marker) {
+//
+//            UniMap.this.marker = marker;
+//
+//            Parking parking = null;
+//
+//
+//
+//            if (marker.getId() != null && parkingMarkers != null && parkingMarkers.size() > 0) {
+//                if (parkingMarkers.get(marker.getId()) != null &&
+//                        parkingMarkers.get(marker.getId()) != null) {
+//                    parking = parkingMarkers.get(marker.getId());
+//                }
+//            }
+//
+//            TextView park_name_tv = (TextView) view.findViewById(R.id.park_name_tv);
+//            TextView park_type_tv = (TextView) view.findViewById(R.id.park_type_tv);
+//            TextView park_restrictions_time_tv = (TextView) view.findViewById(R.id.park_restrictions_time_tv);
+//
+//            park_name_tv.setText(parking.getName());
+//            park_type_tv.setText(parking.getTypeString());
+//            park_restrictions_time_tv.setText(parking.getRestrictionsTime());
+//
+//            return view;
+//
+//        }
+//
+//        @Override
+//        public View getInfoWindow(final Marker marker) {
+//            return null;
+//        }
+//    }
 }

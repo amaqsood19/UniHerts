@@ -11,6 +11,10 @@ import android.view.View;
 
 import com.parse.Parse;
 
+import asmirza.uniherts.map.ParkingMap;
+import asmirza.uniherts.map.StaticMap;
+import asmirza.uniherts.map.UniMap;
+
 
 public class MainMenu extends Activity {
 
@@ -19,7 +23,7 @@ public class MainMenu extends Activity {
 
     // Connection detector class
     ConnectionDetector cd;
-    Boolean isConnected =false;
+    Boolean isConnected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,7 @@ public class MainMenu extends Activity {
         // creating connection detector class instance
         cd = new ConnectionDetector(getApplicationContext());
         isConnected = cd.isConnectingToInternet();
-        if(isConnected == false)
-        {
+        if (isConnected == false) {
             displayAlert();
         }
 
@@ -38,14 +41,13 @@ public class MainMenu extends Activity {
 
     }
 
-    public void displayAlert()
-    {
+    public void displayAlert() {
         new AlertDialog.Builder(this).setMessage("Please Check Your Internet Connection and Try Again")
                 .setTitle("Network Error")
                 .setCancelable(true)
                 .setNeutralButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton){
+                            public void onClick(DialogInterface dialog, int whichButton) {
                                 finish();
                             }
                         })
@@ -76,7 +78,6 @@ public class MainMenu extends Activity {
     }
 
 
-
     public void openMap(View view) {
         Intent intent = new Intent(this, UniMap.class);
         startActivity(intent);
@@ -84,7 +85,7 @@ public class MainMenu extends Activity {
     }
 
     public void openID(View view) {
-    // Start an intent for the logged in activity
+        // Start an intent for the logged in activity
         Intent intent = new Intent(this, DispatchActivity.class);
         startActivity(intent);
 
@@ -113,6 +114,14 @@ public class MainMenu extends Activity {
     public void openStaticMap(View view) {
 
         Intent intent = new Intent(this, StaticMap.class);
+        startActivity(intent);
+
+
+    }
+
+    public void openStudyNet(View view) {
+
+        Intent intent = new Intent(this, StudyNet.class);
         startActivity(intent);
 
 
