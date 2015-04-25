@@ -53,19 +53,23 @@ public class Tools {
     }
 
     public static Bitmap getScaledBitmap(URL picUrl) throws IOException {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 4;
+        BitmapFactory.Options optionsIntial = new BitmapFactory.Options();
+        optionsIntial.inJustDecodeBounds = true;
 
-        Bitmap bitmap = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream());
-        int height = bitmap.getHeight(), width = bitmap.getWidth();
+
+        BitmapFactory.decodeStream(picUrl.openConnection().getInputStream(), null, optionsIntial);
+        int height = optionsIntial.outHeight, width = optionsIntial.outWidth;
 
         if (height > 1280 && width > 960) {
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 6;
             Bitmap rsBitmap = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream(), null, options);
 
             return rsBitmap;
 
         } else {
-            return bitmap;
+            return BitmapFactory.decodeStream(picUrl.openConnection().getInputStream());
         }
     }
 

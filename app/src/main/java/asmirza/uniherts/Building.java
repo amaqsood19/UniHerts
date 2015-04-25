@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import java.util.ArrayList;
 

@@ -3,377 +3,377 @@
         <name>Main Building</name>
         <address>University of Hertfordshire</address>
         <lat>51.752375</lat>
-        <lang>-0.242108</lang>
+        <long>-0.242108</long>
         <zoom>18</zoom>
         <rooms>
             <room>
                 <name>B120B</name>
                 <lat>51.753167</lat>
-                <lang>-0.242132</lang>
+                <long>-0.242132</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B120F</name>
                 <lat>51.753154</lat>
-                <lang>-0.242206</lang>
+                <long>-0.242206</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Dressing room</name>
                 <lat>51.753190</lat>
-                <lang>-0.242210</lang>
+                <long>-0.242210</long>
                 <zoom>22</zoom>
                 <type>dressing</type>
             </room>
             <room>
                 <name>Practice room</name>
                 <lat>51.753167</lat>
-                <lang>-0.242282</lang>
+                <long>-0.242282</long>
                 <zoom>22</zoom>
                 <type>practice</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.753134</lat>
-                <lang>-0.242094</lang>
+                <long>-0.242094</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>B120A</name>
                 <lat>51.753088</lat>
-                <lang>-0.242164</lang>
+                <long>-0.242164</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B121</name>
                 <lat>51.753068</lat>
-                <lang>-0.242285</lang>
+                <long>-0.242285</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.753037</lat>
-                <lang>-0.242071</lang>
+                <long>-0.242071</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>Prince Edward Hall</name>
                 <lat>51.752929</lat>
-                <lang>-0.242201</lang>
+                <long>-0.242201</long>
                 <zoom>22</zoom>
                 <type>lecture_room</type>
             </room>
             <room>
                 <name>Chapman Lounge</name>
                 <lat>51.752884</lat>
-                <lang>-0.242055</lang>
+                <long>-0.242055</long>
                 <zoom>22</zoom>
                 <type>study_lounge</type>
             </room>
             <room>
                 <name>B13B</name>
                 <lat>51.752755</lat>
-                <lang>-0.242270</lang>
+                <long>-0.242270</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Entrance/Exit</name>
                 <lat>51.752711</lat>
-                <lang>-0.242270</lang>
+                <long>-0.242270</long>
                 <zoom>22</zoom>
                 <type>entrance_exit</type>
             </room>
             <room>
                 <name>Reception</name>
                 <lat>51.752712</lat>
-                <lang>-0.242087</lang>
+                <long>-0.242087</long>
                 <zoom>22</zoom>
                 <type>reception</type>
             </room>
             <room>
                 <name>Elevator</name>
                 <lat>51.752788</lat>
-                <lang>-0.241990</lang>
+                <long>-0.241990</long>
                 <zoom>22</zoom>
                 <type>elevator</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.752700</lat>
-                <lang>-0.241983</lang>
+                <long>-0.241983</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>Telephonist</name>
                 <lat>51.752664</lat>
-                <lang>-0.242089</lang>
+                <long>-0.242089</long>
                 <zoom>22</zoom>
                 <type>reception</type>
             </room>
             <room>
                 <name>Office</name>
                 <lat>51.752625</lat>
-                <lang>0.242101</lang>
+                <long>0.242101</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>B125A</name>
                 <lat>51.752620</lat>
-                <lang>-0.242047</lang>
+                <long>-0.242047</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.752619</lat>
-                <lang>-0.241958</lang>
+                <long>-0.241958</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>B154</name>
                 <lat>51.752559</lat>
-                <lang>-0.242079</lang>
+                <long>-0.242079</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B157</name>
                 <lat>51.752519</lat>
-                <lang>-0.241966</lang>
+                <long>-0.241966</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B160</name>
                 <lat>51.752475</lat>
-                <lang>-0.242075</lang>
+                <long>-0.242075</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B159</name>
                 <lat>51.752497</lat>
-                <lang>-0.241966</lang>
+                <long>-0.241966</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.752454</lat>
-                <lang>-0.241958</lang>
+                <long>-0.241958</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>B168A</name>
                 <lat>51.752429</lat>
-                <lang>-0.242103</lang>
+                <long>-0.242103</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B162</name>
                 <lat>51.752428</lat>
-                <lang>-0.242048</lang>
+                <long>-0.242048</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B168</name>
                 <lat>51.752384</lat>
-                <lang>-0.242074</lang>
+                <long>-0.242074</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B200</name>
                 <lat>51.752307</lat>
-                <lang>-0.242072</lang>
+                <long>-0.242072</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>B200</name>
                 <lat>51.752307</lat>
-                <lang>-0.242072</lang>
+                <long>-0.242072</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Printing machine</name>
                 <lat>51.752377</lat>
-                <lang>-0.241931</lang>
+                <long>-0.241931</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.752329</lat>
-                <lang>-0.241955</lang>
+                <long>-0.241955</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>Offices of the Vice Chancellor</name>
                 <lat>51.752231</lat>
-                <lang>-0.242029</lang>
+                <long>-0.242029</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.751934</lat>
-                <lang>-0.241950</lang>
+                <long>-0.241950</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.751849</lat>
-                <lang>-0.241985</lang>
+                <long>-0.241985</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>C152</name>
                 <lat>51.752728</lat>
-                <lang>-0.241845</lang>
+                <long>-0.241845</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C154</name>
                 <lat>51.752720</lat>
-                <lang>-0.241687</lang>
+                <long>-0.241687</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C160</name>
                 <lat>51.752728</lat>
-                <lang>-0.241470</lang>
+                <long>-0.241470</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C210A</name>
                 <lat>51.752382</lat>
-                <lang>-0.241775</lang>
+                <long>-0.241775</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C210</name>
                 <lat>51.752359</lat>
-                <lang>-0.241628</lang>
+                <long>-0.241628</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Office</name>
                 <lat>51.752341</lat>
-                <lang>-0.241778</lang>
+                <long>-0.241778</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>Office</name>
                 <lat>51.752348</lat>
-                <lang>-0.241486</lang>
+                <long>-0.241486</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>C210F</name>
                 <lat>51.752376</lat>
-                <lang>-0.241459</lang>
+                <long>-0.241459</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C262</name>
                 <lat>51.751984</lat>
-                <lang>-0.241598</lang>
+                <long>-0.241598</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C205</name>
                 <lat>51.752042</lat>
-                <lang>-0.241537</lang>
+                <long>-0.241537</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C266</name>
                 <lat>51.751989</lat>
-                <lang>-0.241534</lang>
+                <long>-0.241534</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C268</name>
                 <lat>51.751984</lat>
-                <lang>-0.241472</lang>
+                <long>-0.241472</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C270</name>
                 <lat>51.751976</lat>
-                <lang>-0.241357</lang>
+                <long>-0.241357</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>C272</name>
                 <lat>51.751997</lat>
-                <lang>-0.241314</lang>
+                <long>-0.241314</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Printing room</name>
                 <lat>51.752044</lat>
-                <lang>-0.241362</lang>
+                <long>-0.241362</long>
                 <zoom>22</zoom>
                 <type>office</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.753378</lat>
-                <lang>-0.241392</lang>
+                <long>-0.241392</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>Point store</name>
                 <lat>51.753364</lat>
-                <lang>-0.241392</lang>
+                <long>-0.241392</long>
                 <zoom>22</zoom>
                 <type>store</type>
             </room>
             <room>
                 <name>Entrance/Exit</name>
                 <lat>51.753322</lat>
-                <lang>-0.241337</lang>
+                <long>-0.241337</long>
                 <zoom>22</zoom>
                 <type>entrance_exit</type>
             </room>
             <room>
                 <name>C108</name>
                 <lat>51.753286</lat>
-                <lang>-0.241415</lang>
+                <long>-0.241415</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
@@ -381,429 +381,422 @@
             <room>
                 <name>D100</name>
                 <lat>51.753249</lat>
-                <lang>-0.241412</lang>
+                <long>-0.241412</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D102</name>
                 <lat>51.753186</lat>
-                <lang>-0.241409</lang>
+                <long>-0.241409</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D104</name>
                 <lat>51.753129</lat>
-                <lang>-0.241403</lang>
+                <long>-0.241403</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D110B</name>
                 <lat>51.753098</lat>
-                <lang>-0.241429</lang>
+                <long>-0.241429</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D110A</name>
                 <lat>51.753097</lat>
-                <lang>-0.241369</lang>
+                <long>-0.241369</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D101A</name>
                 <lat>51.753173</lat>
-                <lang>-0.241282</lang>
+                <long>-0.241282</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D101</name>
                 <lat>51.753156</lat>
-                <lang>-0.241264</lang>
+                <long>-0.241264</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D103</name>
                 <lat>51.753119</lat>
-                <lang>-0.241273</lang>
+                <long>-0.241273</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D110C</name>
                 <lat>51.753066</lat>
-                <lang>-0.241437</lang>
+                <long>-0.241437</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D1106</name>
                 <lat>51.753061</lat>
-                <lang>-0.241360</lang>
+                <long>-0.241360</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D1100</name>
                 <lat>51.753036</lat>
-                <lang>-0.241432</lang>
+                <long>-0.241432</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Reception</name>
                 <lat>551.753040</lat>
-                <lang>-0.241366</lang>
+                <long>-0.241366</long>
                 <zoom>22</zoom>
                 <type>reception</type>
             </room>
             <room>
                 <name>D110</name>
                 <lat>51.752984</lat>
-                <lang>-0.241416</lang>
+                <long>-0.241416</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D110F</name>
                 <lat>51.752975</lat>
-                <lang>-0.241354</lang>
+                <long>-0.241354</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D110E</name>
                 <lat>51.752945</lat>
-                <lang>-0.241417</lang>
+                <long>-0.241417</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>toilet</name>
                 <lat>51.752944</lat>
-                <lang>-0.241352</lang>
+                <long>-0.241352</long>
                 <zoom>22</zoom>
                 <type>accessibility_toilet</type>
             </room>
             <room>
                 <name>D107</name>
                 <lat>51.753032</lat>
-                <lang>-0.241277</lang>
+                <long>-0.241277</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>toilet</name>
                 <lat>51.752944</lat>
-                <lang>-0.241352</lang>
+                <long>-0.241352</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>D118</name>
                 <lat>51.752901</lat>
-                <lang>-0.241397</lang>
+                <long>-0.241397</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D120</name>
                 <lat>51.752845</lat>
-                <lang>-0.241393</lang>
+                <long>-0.241393</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D124</name>
                 <lat>51.752795</lat>
-                <lang>-0.241405</lang>
+                <long>-0.241405</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>toilet</name>
                 <lat>51.752826</lat>
-                <lang>-0.241264</lang>
+                <long>-0.241264</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.752805</lat>
-                <lang>-0.241358</lang>
+                <long>-0.241358</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>toilet</name>
                 <lat>51.752829</lat>
-                <lang>-0.241264</lang>
+                <long>-0.241264</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>D117A</name>
                 <lat>51.752756</lat>
-                <lang>-0.241258</lang>
+                <long>-0.241258</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D117B</name>
                 <lat>51.752710</lat>
-                <lang>-0.241254</lang>
+                <long>-0.241254</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D151A</name>
                 <lat>51.752676</lat>
-                <lang>-0.241254</lang>
+                <long>-0.241254</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D153</name>
                 <lat>51.752645</lat>
-                <lang>-0.241265</lang>
+                <long>-0.241265</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D155</name>
                 <lat>51.752622</lat>
-                <lang>-0.241277</lang>
+                <long>-0.241277</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D157</name>
                 <lat>51.752565</lat>
-                <lang>-0.241261</lang>
+                <long>-0.241261</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D157A</name>
                 <lat>51.752494</lat>
-                <lang>-0.241264</lang>
+                <long>-0.241264</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D157B</name>
                 <lat>51.752465</lat>
-                <lang>-0.241262</lang>
+                <long>-0.241262</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D117</name>
                 <lat>51.752774</lat>
-                <lang>-0.241165</lang>
+                <long>-0.241165</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D151</name>
                 <lat>51.752695</lat>
-                <lang>-0.241139</lang>
+                <long>-0.241139</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D119</name>
                 <lat>51.752779</lat>
-                <lang>-0.241032</lang>
+                <long>-0.241032</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D151B</name>
                 <lat>51.752725</lat>
-                <lang>-0.241000</lang>
+                <long>-0.241000</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D151C</name>
                 <lat>51.752683</lat>
-                <lang>-0.241005</lang>
+                <long>-0.241005</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D119A</name>
                 <lat>51.752767</lat>
-                <lang>-0.240919</lang>
+                <long>-0.240919</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Staircase</name>
                 <lat>51.752744</lat>
-                <lang>-0.241018</lang>
+                <long>-0.241018</long>
                 <zoom>22</zoom>
                 <type>stairs</type>
             </room>
             <room>
                 <name>D161A</name>
                 <lat>51.752409</lat>
-                <lang>-0.241246</lang>
+                <long>-0.241246</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D161</name>
                 <lat>51.752412</lat>
-                <lang>-0.241169</lang>
+                <long>-0.241169</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D161C</name>
                 <lat>51.752389</lat>
-                <lang>-0.241061</lang>
+                <long>-0.241061</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D161B</name>
                 <lat>51.752410</lat>
-                <lang>-0.240992</lang>
+                <long>-0.240992</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D165</name>
                 <lat>51.752399</lat>
-                <lang>-0.240934</lang>
+                <long>-0.240934</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D205</name>
                 <lat>51.7523348</lat>
-                <lang>-0.24117</lang>
+                <long>-0.24117</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D205A</name>
                 <lat>51.752343</lat>
-                <lang>-0.241116</lang>
+                <long>-0.241116</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D205C</name>
                 <lat>51.752359</lat>
-                <lang>-0.241088</lang>
+                <long>-0.241088</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D205D</name>
                 <lat>51.752304</lat>
-                <lang>-0.241087</lang>
+                <long>-0.241087</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D206</name>
                 <lat>51.752333</lat>
-                <lang>-0.241034</lang>
+                <long>-0.241034</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D206B</name>
                 <lat>51.752349</lat>
-                <lang>-0.240973</lang>
+                <long>-0.240973</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D206A</name>
                 <lat>51.752272</lat>
-                <lang>-0.240990</lang>
+                <long>-0.240990</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D207</name>
                 <lat>51.752279</lat>
-                <lang>-0.241258</lang>
+                <long>-0.241258</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D208</name>
                 <lat>51.752248</lat>
-                <lang>-0.241262</lang>
+                <long>-0.241262</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>D209</name>
                 <lat>51.752216</lat>
-                <lang>-0.241259</lang>
+                <long>-0.241259</long>
                 <zoom>22</zoom>
                 <type>classroom</type>
             </room>
             <room>
                 <name>Entrance/Exit</name>
                 <lat>51.752195</lat>
-                <lang>-0.241254</lang>
+                <long>-0.241254</long>
                 <zoom>22</zoom>
                 <type>entrance_exit</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.752172</lat>
-                <lang>-0.241255</lang>
+                <long>-0.241255</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
             <room>
                 <name>Toilet</name>
                 <lat>51.752143</lat>
-                <lang>-0.241258</lang>
+                <long>-0.241258</long>
                 <zoom>22</zoom>
                 <type>toilet</type>
             </room>
         </rooms>
     </building>
     <building>
-        <name>Main Building 'D' Corridor</name>
-        <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
-        <lat>51.752375</lat>
-        <lang>-0.241353</lang>
-        <zoom>18</zoom>
-    </building>
-    <building>
         <name>LRC - Buxton Centre for Learning</name>
         <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
         <lat>51.752629</lat>
-        <lang>-0.238506</lang>
+        <long>-0.238506</long>
         <zoom>18</zoom>
     </building>
     <building>
         <name>The Forum</name>
         <address>University Of Hertfordshire, Hatfield, Hertfordshire AL10 9AB</address>
         <lat>51.749923</lat>
-        <lang>-0.241782</lang>
+        <long>-0.241782</long>
         <zoom>18</zoom>
         <rooms>
             <room>
                 <name>Forum Resturant</name>
                 <lat>51.749948</lat>
-                <lang>-0.241589</lang>
+                <long>-0.241589</long>
                 <zoom>22</zoom>
                 <type>food_outlet</type>
                 <info>food_outlet</info>
@@ -811,12 +804,45 @@
             <room>
                 <name>UH Student Union's Shop</name>
                 <lat>51.750041</lat>
-                <lang>-0.241908</lang>
+                <long>-0.241908</long>
+                <zoom>22</zoom>
+                <type>shop</type>
+                <info>shop</info>
+            </room>
+            <room>
+                <name>UH Student Union's Shop</name>
+                <lat>51.750041</lat>
+                <long>-0.241908</long>
                 <zoom>22</zoom>
                 <type>shop</type>
                 <info>shop</info>
             </room>
         </rooms>
     </building>
-    <rooms></rooms>
+    <building>
+        <name>Lindop Building</name>
+        <address>Lindop Building,University Of Hertfordshire,Hatfield, Hertfordshire AL10 9AA
+        </address>
+        <lat>51.752894</lat>
+        <long>-0.244025</long>
+        <zoom>18</zoom>
+        <rooms>
+            <room>
+                <name>Learning Zone in Lindop Building</name>
+                <lat>51.752742</lat>
+                <long>-0.244158</long>
+                <zoom>22</zoom>
+                <type>learning_zone</type>
+                <info>Learning Zone with WIFI,PC and Sofas</info>
+            </room>
+            <room>
+                <name>Toilets</name>
+                <lat>51.752856</lat>
+                <long>-0.244103</long>
+                <zoom>22</zoom>
+                <type>learning_zone</type>
+                <info></info>
+            </room>
+        </rooms>
+    </building>
 </buildings>

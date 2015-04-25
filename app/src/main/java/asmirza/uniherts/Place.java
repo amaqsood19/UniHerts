@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;

@@ -73,10 +73,21 @@
     <string name="facebook_app_id">1399663470355158</string>
     <string name="title_activity_parking_map">ParkingMap</string>
 
-    <string-array name="map_layers_array">
-        <item>Buildings</item>
-        <item>Resturants</item>
+
+    <string-array name="map_menu_array">
+
+        <item>Search Buildings</item>
+        <item>Search Rooms</item>
+
     </string-array>
+
+    <array name="map_menu_drawer_icons">
+        <item>@raw/university</item>
+        <item>@raw/classroom</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

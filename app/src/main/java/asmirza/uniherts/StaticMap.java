@@ -1,12 +1,10 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
-
-import asmirza.uniherts.R;
 
 
 public class StaticMap extends Activity {

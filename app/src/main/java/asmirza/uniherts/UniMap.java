@@ -1,7 +1,8 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -45,8 +46,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import asmirza.uniherts.R;
-
 public class UniMap extends FragmentActivity implements RoutingListener {
 
     private final LatLng collegeLane = new LatLng(51.752375, -0.241353);
@@ -60,10 +59,19 @@ public class UniMap extends FragmentActivity implements RoutingListener {
     CustomDrawerAdapter adapter;
     ImageView iconr;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private ListView mRightDrawerList;
+    private ListView mLeftDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
+    private CharSequence mRightDrawerTitle;
+    private CharSequence mLeftDrawerTitle;
+    private CharSequence mActivityTitle;
+
+    private String[] menuTitles;
+    private TypedArray menuIcons;
+
+    private ArrayList<MenuDrawerItem> menuDrawerItems;
+    private MenuDrawerListAdapter menuAdapter;
+
     private HashMap<String, Building> buildings;
     private ArrayList<Building> buildingPlaces;
     private ArrayList<Room> classRoomPlaces;
@@ -94,9 +102,11 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         setContentView(R.layout.activity_uni_map);
         setUpMapIfNeeded();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.map_drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.right_drawer);
-        mTitle = getTitle().toString();
-        mDrawerTitle = "Select Layers to show";
+        mRightDrawerList = (ListView) findViewById(R.id.right_drawer);
+        mLeftDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mActivityTitle = getTitle().toString();
+        mRightDrawerTitle = "Select Layers to show";
+        mLeftDrawerTitle = "Main Menu";
         // Set the adapter for the list view
         dataList = new ArrayList<DrawerItem>();
         dataList.add(new DrawerItem("Buildings", "building", R.raw.university, false));
@@ -107,10 +117,30 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         adapter = new CustomDrawerAdapter(this, R.layout.drawer_list_item,
                 dataList);
 
-        mDrawerList.setAdapter(adapter);
+        mRightDrawerList.setAdapter(adapter);
 
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mRightDrawerList.setOnItemClickListener(new LayersDrawerItemClickListener());
+
+        menuTitles = getResources().getStringArray(R.array.map_menu_array);
+
+        menuIcons = getResources().obtainTypedArray(R.array.map_menu_drawer_icons);
+
+        menuDrawerItems = new ArrayList<MenuDrawerItem>();
+
+        menuDrawerItems.add(new MenuDrawerItem(menuTitles[0], menuIcons.getResourceId(0, -1)));
+
+        menuDrawerItems.add(new MenuDrawerItem(menuTitles[1], menuIcons.getResourceId(1, -1)));
+
+
+        menuIcons.recycle();
+
+        // setting the nav drawer list adapter
+        menuAdapter = new MenuDrawerListAdapter(getApplicationContext(),
+                menuDrawerItems);
+        mLeftDrawerList.setAdapter(menuAdapter);
+
+        // Set the Left Menu list's click listener
+        mLeftDrawerList.setOnItemClickListener(new MenuDrawerItemClickListener());
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -122,8 +152,14 @@ public class UniMap extends FragmentActivity implements RoutingListener {
              * Called when a drawer has settled in a completely open state.
              */
             public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(mDrawerTitle);
+                if (drawerView.equals(mLeftDrawerList)) {
+                    getActionBar().setTitle(mLeftDrawerTitle);
+                    supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                    mDrawerToggle.syncState();
+                } else if (drawerView.equals(mRightDrawerList)) {
+                    getActionBar().setTitle(mRightDrawerTitle);
+                    supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -132,7 +168,7 @@ public class UniMap extends FragmentActivity implements RoutingListener {
              */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getActionBar().setTitle(mTitle);
+                getActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -141,8 +177,10 @@ public class UniMap extends FragmentActivity implements RoutingListener {
                 if (item != null && item.getItemId() == android.R.id.home) {
                     if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                         mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                    } else if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
                     } else {
-                        mDrawerLayout.openDrawer(Gravity.RIGHT);
+                        mDrawerLayout.openDrawer(Gravity.LEFT);
                     }
                 }
                 return false;
@@ -158,8 +196,11 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+
                 if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                     mDrawerLayout.closeDrawer(Gravity.RIGHT);
+
+
                 } else {
                     mDrawerLayout.openDrawer(Gravity.RIGHT);
                 }
@@ -167,30 +208,12 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         });
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
 
 
     }
 
-    private void selectItem(int position) {
-        // update the main content by replacing fragments
-//        Fragment fragment = new PlanetFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-//        fragment.setArguments(args);
-//
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-//
-//        // update selected item and title, then close the drawer
-//        mDrawerList.setItemChecked(position, true);
-//        setTitle(mPlanetTitles[position]);
-//        mDrawerLayout.closeDrawer(mDrawerList);
-    }
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
@@ -586,7 +609,6 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             default:
                 return super.onOptionsItemSelected(item);
         }
-        // Handle your other action bar items...
 
 
     }
@@ -630,8 +652,25 @@ public class UniMap extends FragmentActivity implements RoutingListener {
         mMap.addMarker(options);
     }
 
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    private void selectItem(int position) {
+        // Highlight the selected item, update the title, and close the drawer
+        switch (position) {
+            case 0:
+                mDrawerLayout.closeDrawer(mLeftDrawerList);
+                Intent intent = new Intent(this, ListBuildings.class);
+                startActivityForResult(intent, 1);
+            case 1:
+                mDrawerLayout.closeDrawer(mLeftDrawerList);
+                Intent listRoomsIntent = new Intent(this, ListRooms.class);
+                startActivityForResult(listRoomsIntent, 1);
+            default:
+                mDrawerLayout.closeDrawer(mLeftDrawerList);
+                break;
+        }
+    }
+
+    /* The click listner for Layers ListView in the right drawer */
+    private class LayersDrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -666,6 +705,15 @@ public class UniMap extends FragmentActivity implements RoutingListener {
             plotSelectedTypeMarkers(layersList);
 
 
+        }
+    }
+
+    private class MenuDrawerItemClickListener implements ListView.OnItemClickListener {
+
+
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            selectItem(position);
         }
     }
 

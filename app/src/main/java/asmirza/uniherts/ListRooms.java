@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -15,8 +15,6 @@ import android.widget.ExpandableListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
-
-import asmirza.uniherts.R;
 
 
 public class ListRooms extends Activity {

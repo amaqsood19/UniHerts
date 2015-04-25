@@ -11,10 +11,6 @@ import android.view.View;
 
 import com.parse.Parse;
 
-import asmirza.uniherts.map.ParkingMap;
-import asmirza.uniherts.map.StaticMap;
-import asmirza.uniherts.map.UniMap;
-
 
 public class MainMenu extends Activity {
 

@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-
-import asmirza.uniherts.R;
 
 public class ParkingMap extends FragmentActivity {
 
@@ -140,8 +138,9 @@ public class ParkingMap extends FragmentActivity {
     private BitmapDescriptor getParkingIcon(Parking p) {
         int type = p.getType();
         BitmapDescriptor icon = null;
-
-        if (type == 1) {
+        if (type == 0) {
+            icon = BitmapDescriptorFactory.fromResource(R.raw.parking_disabled);
+        } else if (type == 1) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.parking_yellow);
         } else if (type == 2) {
             icon = BitmapDescriptorFactory.fromResource(R.raw.parking_green);

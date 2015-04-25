@@ -58,7 +58,9 @@ public class NewsListAdapter extends ArrayAdapter<NewsPost> {
         holder = (NewsPostHolder) v.getTag();
         NewsPost p = postList.get(position);
         holder.headlineTv.setText(p.getMessage());
-        holder.picIv.setImageBitmap(p.getPicture());
+        if (p.getPicture() != null) {
+            holder.picIv.setImageBitmap(p.getPicture());
+        }
         holder.picNameTv.setText(p.getPictureName());
         holder.picDescTv.setText(p.getPictureDescription());
         holder.newDateTimeTv.setText(p.getDateTimeCreated());

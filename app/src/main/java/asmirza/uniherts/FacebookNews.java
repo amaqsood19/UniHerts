@@ -30,7 +30,7 @@ public class FacebookNews extends ListActivity {
     // JSON Node names
     private static final String TAG_DATA = "data";
     private static final String TAG_MESSAGE = "message";
-    private static final String TAG_FULL_PICTURE = "full_picture";
+    private static final String TAG_PICTURE = "full_picture";
     private static final String TAG_NAME = "name";
     private static final String TAG_DESCP = "description";
     private static final String TAG_LINK = "link";
@@ -114,7 +114,7 @@ public class FacebookNews extends ListActivity {
 
                     String message = "";
                     String pictureUrl = "";
-                    Bitmap picture;
+                    Bitmap picture = null;
                     String name = "";
                     String description = "";
                     String link = "";
@@ -127,11 +127,15 @@ public class FacebookNews extends ListActivity {
                         if (c.has(TAG_MESSAGE)) {
                             message = c.getString(TAG_MESSAGE);
                         }
+                        if (c.has(TAG_PICTURE)) {
+                            name = c.getString(TAG_NAME);
 
-                        pictureUrl = c.getString(TAG_FULL_PICTURE);
-                        URL picUrl = new URL(pictureUrl);
-                        //picture = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream());
-                        picture = Tools.getScaledBitmap(picUrl);
+                            pictureUrl = c.getString(TAG_PICTURE);
+                            URL picUrl = new URL(pictureUrl);
+                            //picture = BitmapFactory.decodeStream(picUrl.openConnection().getInputStream());
+                            picture = Tools.getScaledBitmap(picUrl);
+                        }
+
                         if (c.has(TAG_NAME)) {
                             name = c.getString(TAG_NAME);
                         }

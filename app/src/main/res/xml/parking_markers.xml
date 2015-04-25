@@ -1,23 +1,39 @@
 <parkings>
+
     <parking>
-        <name>Parking Coales Hall</name>
+        <name>Parking Art and Design Building</name>
         <lat>51.754579</lat>
         <lang>-0.243821</lang>
         <zoom>15</zoom>
-        <address>University Of Hertfordshire \r\n College Lane Hatfield, \r\n Hertfordshire AL10
-            9AB
+        <address>University Of HertfordshireCollege Lane Hatfield,Hertfordshire AL10 9AB
         </address>
         <code>P-F</code>
         <type>2</type>
-        <isDisable>N</isDisable>
         <spaceDetails>75</spaceDetails>
-        <features>Disable Parking</features>
-        <parkingRestrictions>Staff Members holding Permit</parkingRestrictions>
-        <restrictionsTime>Monday - Friday \r\n 08:00 – 17:30 hours</restrictionsTime>
+        <features></features>
+        <parkingRestrictions>Student Parking(Pay and Display), Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday08:00 – 17:30 hours</restrictionsTime>
     </parking>
 
     <parking>
-        <name>Parking Telford Court</name>
+        <name>Parking Todd Building</name>
+        <lat>51.753427</lat>
+        <lang>-0.243841</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire
+            AL10,9AB
+        </address>
+        <code>P-E</code>
+        <type>4</type>
+        <spaceDetails>40</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Fee Paying Staff Parking, Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday 08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+    <parking>
+    <name>Parking Telford Court</name>
         <lat>51.753753</lat>
         <lang>-0.244296</lang>
         <zoom>15</zoom>
@@ -25,7 +41,6 @@
         </address>
         <code>P-D</code>
         <type>3</type>
-        <isDisable>N</isDisable>
         <spaceDetails>25</spaceDetails>
         <features>Disable Parking</features>
         <parkingRestrictions>The rules are in force from 08:00 – 17:30 hours Monday to Friday except
@@ -35,21 +50,278 @@
     </parking>
 
     <parking>
-        <name>Parking Roberts Way</name>
-        <lat>51.750771</lat>
-        <lang>-0.236911</lang>
+
+
+        <name>Parking Todd Building</name>
+        <lat>51.753603</lat>
+        <lang>-0.244184</lang>
         <zoom>15</zoom>
-        <address>University Of Hertfordshire \nCollege Lane Hatfield, \nHertfordshire AL10 9AB
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP1-E</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>5</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+
+
+    </parking>
+
+    <parking>
+        <name>Parking Todd Building</name>
+        <lat>51.753196</lat>
+        <lang>-0.243874</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP2-E</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>5</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Todd Building</name>
+        <lat>51.753279</lat>
+        <lang>-0.244394</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
         </address>
         <code>P-D</code>
-        <type>1</type>
-        <isDisable>N</isDisable>
-        <spaceDetails>25</spaceDetails>
-        <features>Disable Parking</features>
-        <parkingRestrictions>The rules are in force from 08:00 – 17:30 hours Monday to Friday except
-            BankHolidays and Privilege days when the University is closed.
+        <type>4</type>
+        <spaceDetails>10</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Fee Paying Staff Parking, Staff Members holding Permit
         </parkingRestrictions>
-        <restrictionsTime>Monday - Friday \n 08:00 – 17:30 hours</restrictionsTime>
+        <restrictionsTime>Monday - Friday\r\n\r\n08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Lindop Building</name>
+        <lat>51.752852</lat>
+        <lang>-0.243734</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>P-C</code>
+        <type>1</type>
+        <spaceDetails>6</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Valid Visitor Permit Holders, Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday\r\n\r\n08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Lindop Building</name>
+        <lat>51.752802</lat>
+        <lang>-0.243751</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-C</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>4</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+    <parking>
+        <name>Parking Lindop Building</name>
+        <lat>51.752802</lat>
+        <lang>-0.243751</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-C</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>4</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+    <parking>
+        <name>Parking Mercer Building</name>
+        <lat>51.752231</lat>
+        <lang>-0.243820</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-A</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>5</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Mercer Building</name>
+        <lat>51.751922</lat>
+        <lang>-0.243810</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>P-A</code>
+        <type>4</type>
+        <spaceDetails>30</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Fee Paying Staff Parking, Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday\r\n\r\n08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Main Reception</name>
+        <lat>51.752849</lat>
+        <lang>-0.242790</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-B</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>6</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Nursery</name>
+        <lat>51.750581</lat>
+        <lang>-0.242823</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>N-D</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>1</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+
+    <parking>
+        <name>Parking Hutton Hub</name>
+        <lat>51.750700</lat>
+        <lang>-0.242632</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>H-D</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>3</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Multi Storey Car Park</name>
+        <lat>51.748671</lat>
+        <lang>-0.241835</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>P-K</code>
+        <type>2</type>
+        <spaceDetails>300</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Student Parking(Pay and Display), Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday\r\n\r\n08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Multi Storey Car Park</name>
+        <lat>51.748824</lat>
+        <lang>-0.242162</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-K</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>50</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Film, Music and Media Building</name>
+        <lat>51.753808</lat>
+        <lang>-0.242800</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>P-G</code>
+        <type>4</type>
+        <spaceDetails>70</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Fee Paying Staff Parking, Staff Members holding Permit
+        </parkingRestrictions>
+        <restrictionsTime>Monday - Friday\r\n\r\n08:00 – 17:30 hours</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Film, Music and Media Building</name>
+        <lat>51.753669</lat>
+        <lang>-0.241829</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>DP-G</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>3</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
+    </parking>
+
+    <parking>
+        <name>Parking Hillside House</name>
+        <lat>51.752590</lat>
+        <lang>-0.240751</lang>
+        <zoom>15</zoom>
+        <address>University Of Hertfordshire\r\n\r\nCollege Lane Hatfield,\r\n\r\nHertfordshire AL10
+            9AB
+        </address>
+        <code>Hill-D</code>
+        <type>0</type>
+        <isDisable>Y</isDisable>
+        <spaceDetails>4</spaceDetails>
+        <features></features>
+        <parkingRestrictions>Accessible parking(Blue Batch Holders Only)</parkingRestrictions>
+        <restrictionsTime>Restrictions apply at all the times</restrictionsTime>
     </parking>
 
 </parkings>

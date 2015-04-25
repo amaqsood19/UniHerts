@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import asmirza.uniherts.R;
 
 public class PlacesListAdapter extends ArrayAdapter<Place> implements Filterable {
     private List<Place> placeList;

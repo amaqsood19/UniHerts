@@ -9,8 +9,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
 
-import asmirza.uniherts.map.MapXML;
-
 public class LoadingTask extends AsyncTask<String, Integer, Integer> {
 
     // This is the progress bar you want to update while the task is in progress

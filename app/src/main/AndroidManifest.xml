@@ -2,28 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="asmirza.uniherts">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <!--
- The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but are recommended.
-    -->
+    <!-- The following two permissions are not required to use
+         Google Maps Android API v2, but are recommended. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
-    <!--
-     To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
-     option is required to comply with the Google+ Sign-In developer policies
-    -->
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <!-- To retrieve the account name (email) as part of sign-in: -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <permission
         android:name=".permission.MAPS_RECEIVE"
@@ -35,6 +27,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <meta-data
@@ -45,7 +40,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".map.UniMap"
+            android:name=".UniMap"
             android:icon="@drawable/layers_icon"
             android:label="@string/title_activity_uni_map"></activity>
 
@@ -75,10 +70,10 @@
             android:name=".DispatchActivity"
             android:label="@string/title_activity_dispatch"></activity>
         <activity
-            android:name=".map.ListBuildings"
+            android:name=".ListBuildings"
             android:label="@string/title_activity_list_buildings"></activity>
         <activity
-            android:name=".map.ListRooms"
+            android:name=".ListRooms"
             android:label="@string/title_activity_list_rooms"></activity>
         <activity
             android:name=".CardView"
@@ -88,7 +83,7 @@
             android:name=".StudentIDMain"
             android:label="@string/title_activity_student_idmain"></activity>
         <activity
-            android:name=".map.StaticMap"
+            android:name=".StaticMap"
             android:label="@string/title_activity_static_map"></activity>
         <activity
             android:name=".Barcode"
@@ -115,7 +110,7 @@
             android:name=".FacebookNews"
             android:label="@string/title_activity_facebook_news"></activity>
         <activity
-            android:name=".map.ParkingMap"
+            android:name=".ParkingMap"
             android:label="@string/title_activity_parking_map"></activity>
         <activity
             android:name=".StudyNet"

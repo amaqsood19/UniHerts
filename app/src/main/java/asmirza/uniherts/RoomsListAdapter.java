@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 
 import android.content.Context;
@@ -11,8 +11,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import asmirza.uniherts.R;
 
 public class RoomsListAdapter extends BaseExpandableListAdapter implements Filterable {
 

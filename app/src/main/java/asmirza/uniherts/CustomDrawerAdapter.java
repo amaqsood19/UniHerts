@@ -1,4 +1,4 @@
-package asmirza.uniherts.map;
+package asmirza.uniherts;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-
-import asmirza.uniherts.R;
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
